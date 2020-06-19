@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.keepfitting.jit.keepfitting.ModifyUserActivity">
+
+
+    <TextView
+        android:id="@+id/tv_modify_sex"
+        style="@style/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/rg_sex"
+        android:layout_marginEnd="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_toStartOf="@+id/tv_register_birthday"
+        android:text="性别" />
+
+
+    <RadioGroup
+        android:id="@+id/rg_sex"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+
+        android:layout_margin="20dp"
+        android:layout_toRightOf="@id/tv_modify_sex"
+        android:layout_height="wrap_content">
+
+
+        <RadioButton
+            android:id="@+id/rb_register_male"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            style="@style/BottomTabStyle"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_male" />
+
+        <RadioButton
+            android:id="@+id/rb_register_female"
+            style="@style/BottomTabStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:drawableTop="@drawable/selector_female" />
+
+    </RadioGroup>
+
+
+    <TextView
+        style="@style/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/tv_modify_sex"
+        android:layout_below="@+id/tv_modify_sex"
+        android:layout_marginTop="37dp"
+        android:text="生日"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/tv_register_birthday"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginEnd="16dp"
+        android:background="@color/gray"
+        android:gravity="center" />
+
+
+    <TextView
+        style="@style/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="30dp"
+        android:text="身高"
+        android:id="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/tv_register_high"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/tv_register_birthday"
+        android:layout_alignTop="@+id/textView3"
+        android:background="@color/gray"
+        android:gravity="center" />
+
+
+    <TextView
+        style="@style/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@id/textView3"
+        android:layout_below="@+id/tv_register_high"
+        android:layout_marginTop="30dp"
+        android:layout_toStartOf="@+id/tv_register_high"
+        android:text="体重"
+        android:id="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tv_register_weight"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4"
+        android:background="@color/gray"
+        android:gravity="center" />
+
+
+    <TextView
+        style="@style/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="72dp"
+        android:text="活动类型" />
+
+    <TextView
+        android:id="@+id/tv_modify_action"
+        style="@style/text_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_register_weight"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:drawableLeft="@mipmap/ic_light_person"
+        android:drawablePadding="20dp"
+        android:gravity="center"
+        android:text="轻体力活" />
+
+
+    <Button
+        android:id="@+id/bt_modify_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_modify_action"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+        android:text="完成" />
+
+</RelativeLayout>
