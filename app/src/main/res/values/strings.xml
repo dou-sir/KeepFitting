@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KeepFitting</string>
+    <string name="app_name">药运动</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
