@@ -56,8 +56,10 @@ public class MainActivity extends AppCompatActivity {
                         //todo 切换fragment
                         break;
                     case R.id.nav_mygoal:
-                        //todo
+                        FragmentGoal fragmentGoal=new FragmentGoal();
+                        fmTransaction(fragmentGoal);
                         break;
+                    //另有添加按钮
                     case R.id.nav_newgol:
                         //todo
                         break;
@@ -103,4 +105,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.ll_main,fragment);
         fragmentTransaction.commit();
     }
+
+
 }
