@@ -383,4 +383,9 @@ class TimeCount extends CountDownTimer {
         videoview.stopPlayback();
         super.onStop();
     }
+
+    public void toLoginbypwd(View v){
+        startActivity(new Intent(this,LoginByPwdActivity.class));
+        this.finish();
+    }
 }
