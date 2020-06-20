@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/fitness"
+            android:title="主页"/>
+        <item
+            android:id="@+id/nav_mygoal"
+            android:icon="@drawable/fitness"
+            android:title="我的计划"/>
+        <item
+            android:id="@+id/nav_newgol"
+            android:icon="@drawable/fitness"
+            android:title="新增计划"/>
+        <item
+            android:id="@+id/nav_newfigure"
+            android:icon="@drawable/fitness"
+            android:title="记录身材"/>
+        <item
+            android:id="@+id/nav_showfigure"
+            android:icon="@drawable/fitness"
+            android:title="变化趋势"/>
+        <item
+            android:id="@+id/nav_showfoodCC"
+            android:icon="@drawable/fitness"
+            android:title="查询食物热量"/>
+        <item
+            android:id="@+id/nav_showconusumeCC"
+            android:icon="@drawable/fitness"
+            android:title="查询运动消耗"/>
+        <item
+            android:id="@+id/nav_showself"
+            android:icon="@drawable/fitness"
+            android:title="一分钟了解自己"/>
+        <item
+            android:id="@+id/nav_"
+            android:icon="@drawable/fitness"
+            android:title="nav_"/>
+        <item
+            android:id="@+id/nav"
+            android:icon="@drawable/fitness"
+            android:title="nav"/>
+
+    </group>
+</menu>
