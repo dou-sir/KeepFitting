@@ -67,8 +67,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_reliang"
-        android:text="在活动强度不变情况下消耗的最低热量
-        当摄入小于支出时体重下降
+        android:text="在活动强度不变情况下消耗的最低热量\n
+        当摄入小于支出时体重下降\n
         当摄入大于支出时体重增加"
         android:textSize="13sp"/>
 
@@ -84,10 +84,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_xinlv"
-        android:text="热要燃烧脂肪需要满足三个必要条件
-        1 该运动要达到中低强度的运动心率；
-        2 这种中低强度运动心率的运动要持续20分钟以上；
-        3 这种运动必须是大肌肉群的运动，如慢跑 游泳 健身操等
+        android:singleLine = "false"
+        android:text="热要燃烧脂肪需要满足三个必要条件\n
+        1 该运动要达到中低强度的运动心率；\n
+        2 这种中低强度运动心率的运动要持续20分钟以上；\n
+        3 这种运动必须是大肌肉群的运动，如慢跑 游泳 健身操等\n
         低于或高于这个心率都不是中强度运动心率，燃烧的也就不是脂肪了
 "/>
 

@@ -43,9 +43,12 @@ public class LoginByPwdActivity extends AppCompatActivity {
         bt_loginbypwd_verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginByPwdActivity.this,MainActivity.class);
+                Intent intent = new Intent(LoginByPwdActivity.this,KonwMeActivity.class);
                 startActivity(intent);
                 LoginByPwdActivity.this.finish();
+//                Intent intent = new Intent(LoginByPwdActivity.this,MainActivity.class);
+//                startActivity(intent);
+//                LoginByPwdActivity.this.finish();
             }
         });
 
