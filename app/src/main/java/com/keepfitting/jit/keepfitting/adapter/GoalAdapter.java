@@ -126,6 +126,8 @@ public class GoalAdapter extends BaseAdapter {
                     listener.ChangeStatus();
                 }
 
+                System.out.println(" ");
+
 
 
 
