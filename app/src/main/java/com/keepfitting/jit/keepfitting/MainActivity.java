@@ -103,6 +103,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.ll_main,fragment);
         fragmentTransaction.commit();
 
-        System.out.println(1);
+        System.out.println(2);
     }
 }
