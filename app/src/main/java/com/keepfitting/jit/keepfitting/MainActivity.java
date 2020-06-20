@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.ll_main,fragment);
         fragmentTransaction.commit();
+
+        System.out.println(2);
     }
 
 
