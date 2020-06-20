@@ -127,6 +127,8 @@ public class GoalAdapter extends BaseAdapter {
                 }
 
 
+                System.out.println(" ");
+
 
 
 
