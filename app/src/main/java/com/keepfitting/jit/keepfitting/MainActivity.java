@@ -1,5 +1,6 @@
 package com.keepfitting.jit.keepfitting;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     //另有添加按钮
                     case R.id.nav_newgol:
-                        //todo
+                        startActivity(new Intent(MainActivity.this,AddGoalActivity.class));
                         break;
                     case R.id.nav_newfigure:
                         ShowFigureFragment showFigureFragment = new ShowFigureFragment();

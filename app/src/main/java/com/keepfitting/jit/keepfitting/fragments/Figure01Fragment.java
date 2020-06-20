@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.keepfitting.jit.keepfitting.DetailsMarkerView;
 import com.keepfitting.jit.keepfitting.R;
 import com.keepfitting.jit.keepfitting.util.ChartUtils;
 
@@ -35,9 +38,28 @@ public class Figure01Fragment extends Fragment {
 
         lc_chart = view.findViewById(R.id.lc_chart);
 
-        ChartUtils.initChart(lc_chart);
+        ChartUtils.initChart(lc_chart, getData().size(),getContext());
         ChartUtils.notifyDataSetChanged(lc_chart, getData());
 
+//        //点击图表坐标监听
+//        lc_chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//            @Override
+//            public void onValueSelected(Entry e, Highlight h) {
+//                //查看覆盖物是否被回收
+//                if (ChartUtils.isMarkerAllNull()) {
+//                    //重新绑定覆盖物
+//                    createMakerView();
+//                    //并且手动高亮覆盖物
+//                    lc_chart.highlightValue(h);
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected() {
+//
+//            }
+//        });
+//
     }
 
     private List<Entry> getData(){
@@ -76,6 +98,14 @@ public class Figure01Fragment extends Fragment {
         return entries;
     }
 
+//    /**
+//     * 创建覆盖物
+//     */
+//    public void createMakerView() {
+//        DetailsMarkerView detailsMarkerView = new DetailsMarkerView(getContext(),R.layout.details_makerview);
+//        detailsMarkerView.setChartView(lc_chart);
+//        ChartUtils.setDetailsMarkerView(detailsMarkerView);
+//    }
 
 
 }

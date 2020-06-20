@@ -1,9 +1,15 @@
 package com.keepfitting.jit.keepfitting.util;
 
+import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.PointF;
+import android.view.MotionEvent;
 
+import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
@@ -12,7 +18,11 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
+import com.keepfitting.jit.keepfitting.DetailsMarkerView;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +31,7 @@ import java.util.List;
  * Created by 14032 on 2020/6/18.
  */
 
-public class ChartUtils {
+public class ChartUtils extends LineChart {
 
     public static int dayValue=0;
     public static int monthValue=2;
@@ -31,13 +41,22 @@ public class ChartUtils {
     private static YAxis rightYaxis;           //右侧Y轴
     private static Legend legend;              //图例
     private static LimitLine limitLine;        //限制线
+//    PointF downPoint = new PointF();
+//
+//    //弱引用覆盖物对象,防止内存泄漏,不被回收
+//    private static WeakReference<DetailsMarkerView> mDetailsReference;
+
+    public ChartUtils(Context context) {
+        super(context);
+    }
+
     /**
      * 初始化图表
      *
      * @param chart 原始图表
      * @return 初始化后的图表
      */
-    public static LineChart initChart(LineChart chart) {
+    public static LineChart initChart(LineChart chart, int size, Context mcontext) {
         /***图表设置***/
         // 没有数据的时候，显示“暂无数据”
         chart.setNoDataText("暂无数据");
@@ -48,7 +67,7 @@ public class ChartUtils {
         //是否显示边界
         chart.setDrawBorders(false);
         //是否可以拖动
-        chart.setDragEnabled(false);
+        chart.setDragEnabled(true);
         //是否有触摸事件
         chart.setTouchEnabled(true);
         // 不显示图例
@@ -69,6 +88,15 @@ public class ChartUtils {
         //设置坐标轴线的颜色
         xAxis.setAxisLineColor(Color.parseColor("#FFA500"));
         leftYAxis.setAxisLineColor(Color.parseColor("#8B0000"));
+        //轴宽度
+        xAxis.setAxisLineWidth(3f);
+        leftYAxis.setAxisLineWidth(3f);
+        //x轴文字斜着
+        xAxis.setLabelRotationAngle(-60);
+
+        //轴文字大小
+        xAxis.setTextSize(15f);
+        leftYAxis.setTextSize(13f);
         //轴文字颜色
         xAxis.setTextColor(Color.parseColor("#FFA500"));
         leftYAxis.setTextColor(Color.parseColor("#8B0000"));
@@ -79,7 +107,6 @@ public class ChartUtils {
         //保证Y轴从0开始，不然会上移一点
         leftYAxis.setAxisMinimum(0f);
 //        rightYaxis.setAxisMinimum(0f);
-
 
         /***折线图例 标签 设置***/
         legend = chart.getLegend();
@@ -100,7 +127,19 @@ public class ChartUtils {
         chart.getViewPortHandler().refresh(matrix, chart, false);
 //         x轴执行动画
         chart.animateX(500);
-        chart.moveViewToX(19);
+//                定位到最新
+        chart.moveViewToX(size-1);
+
+        Description description = new Description();
+        description.setText("体重");//需要展示的内容
+        description.setTextSize(50f);
+        description.setEnabled(true);
+        chart.setDescription(description);
+
+        DetailsMarkerView detailsMarkerView = new DetailsMarkerView(mcontext);
+        detailsMarkerView.setChartView(chart);
+        chart.setMarker(detailsMarkerView);
+
         chart.invalidate();
         return chart;
     }
@@ -123,19 +162,27 @@ public class ChartUtils {
         } else {
             lineDataSet = new LineDataSet(values, "");
             // 设置曲线颜色
-            lineDataSet.setColor(Color.GREEN);//Color.parseColor("#543255")
-
+            lineDataSet.setColor(Color.parseColor("#FF8BB708"));//Color.parseColor("#543255")
+            //3.5倍粗曲线
+            lineDataSet.setLineWidth(3.5f);
+            lineDataSet.setLabel("54646");
             // 设置平滑曲线
             lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             // 不显示坐标点的小圆点
 //            lineDataSet.setDrawCircles(false);
             //设置曲线值的圆点是实心还是空心
             lineDataSet.setDrawCircleHole(false);
-            lineDataSet.setValueTextSize(10f);
+            lineDataSet.setCircleRadius(3.5f);
+            lineDataSet.setCircleColor(Color.parseColor("#FF8BB703"));
+            //坐标点的数据字体大小
+            lineDataSet.setValueTextSize(13f);
+            //字体颜色
+            lineDataSet.setValueTextColor(Color.BLUE);
             // 不显示坐标点的数据
 //            lineDataSet.setDrawValues(false);
             // 不显示定位线
             lineDataSet.setHighlightEnabled(false);
+
 
             LineData data = new LineData(lineDataSet);
             chart.setData(data);
@@ -155,6 +202,7 @@ public class ChartUtils {
             @Override
             public String getFormattedValue(float value) {
                 int size = values.size();
+
                 return xValuesProcess(size)[(int) value];//todo????
             }
         });
@@ -178,10 +226,89 @@ public class ChartUtils {
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
         for (int i = size-1; i >= 0; i--) {
             monthValues[i] = formatter.format(new Date(currentTime));//TimeUtils.dateToString(currentTime, TimeUtils.dateFormat_month);
-            currentTime -= (4 * 24 * 60 * 60 * 1000);
+            currentTime -= (24 * 60 * 60 * 1000);
         }
         return monthValues;
     }
 
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        getParent().requestDisallowInterceptTouchEvent(true);// 用getParent去请求,
+//        // 不拦截
+//        return super.dispatchTouchEvent(ev);
+//    }
+//
+//    @Override
+//    public boolean onTouchEvent(MotionEvent evt) {
+//        switch (evt.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                downPoint.x = evt.getX();
+//                downPoint.y = evt.getY();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                if (getScaleX() > 1 && Math.abs(evt.getX() - downPoint.x) > 5) {
+//                    getParent().requestDisallowInterceptTouchEvent(true);
+//                }
+//                break;
+//        }
+//        return super.onTouchEvent(evt);
+//    }
 
+//    /**
+//     * 所有覆盖物是否为空
+//     *
+//     * @return TRUE FALSE
+//     */
+//    public static boolean isMarkerAllNull() {
+//        return mDetailsReference.get() == null ;
+//    }
+//
+//    public static void setDetailsMarkerView(DetailsMarkerView detailsMarkerView) {
+//        mDetailsReference = new WeakReference<>(detailsMarkerView);
+//    }
+
+//    /**
+//     复制父类的 drawMarkers方法，并且更换上自己的markerView
+//     * draws all MarkerViews on the highlighted positions
+//     */
+//    protected void drawMarkers(Canvas canvas) {
+//        DetailsMarkerView mDetailsMarkerView = mDetailsReference.get();
+//
+//        // if there is no marker view or drawing marker is disabled
+//        if (mDetailsMarkerView == null || !isDrawMarkersEnabled() || !valuesToHighlight())
+//            return;
+//
+//        for (int i = 0; i < mIndicesToHighlight.length; i++) {
+//
+//            Highlight highlight = mIndicesToHighlight[i];
+//
+//            IDataSet set = mData.getDataSetByIndex(highlight.getDataSetIndex());
+//
+//            Entry e = mData.getEntryForHighlight(mIndicesToHighlight[i]);
+//
+//            int entryIndex = set.getEntryIndex(e);
+//
+//            // make sure entry not null
+//            if (e == null || entryIndex > set.getEntryCount() * mAnimator.getPhaseX())
+//                continue;
+//
+//            float[] pos = getMarkerPosition(highlight);
+//
+//            LineDataSet dataSetByIndex = (LineDataSet) getLineData().getDataSetByIndex(highlight.getDataSetIndex());
+//
+//            // check bounds
+//            if (!mViewPortHandler.isInBounds(pos[0], pos[1]))
+//                continue;
+//
+//            float circleRadius = dataSetByIndex.getCircleRadius();
+//
+//            //pos[0], pos[1] x 和 y
+//            // callbacks to update the content
+//            mDetailsMarkerView.refreshContent(e, highlight);
+//
+//            mDetailsMarkerView.draw(canvas, pos[0], pos[1]);
+//
+//
+//        }
+//    }
 }
