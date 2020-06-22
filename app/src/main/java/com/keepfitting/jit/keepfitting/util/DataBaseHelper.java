@@ -36,7 +36,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "userId int,figureType String,figureData String,recordDate String)");
 
         //user数据
-        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone,ustate) values (0,'cxk','123','233',1)");
+        db.execSQL("insert into tb_user values (0,'cxk','123','233',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,1)");
         db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (1,'dyy','123','123')");
         db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (2,'xy','123','321')");
         db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (3,'cwn','123','121')");
