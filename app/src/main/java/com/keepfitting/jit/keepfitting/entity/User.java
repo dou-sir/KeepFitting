@@ -60,6 +60,11 @@ public class User implements Serializable {
         this.ustate = ustate;
     }
 
+    public User(String nickname, String authToken) {
+        this.nickname=nickname;
+        this.authToken=authToken;
+    }
+
     @Override
     public String toString() {
         return "User{" +

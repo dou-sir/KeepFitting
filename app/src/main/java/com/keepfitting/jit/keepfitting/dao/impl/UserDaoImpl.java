@@ -84,6 +84,18 @@ public class UserDaoImpl implements UserDao {
         db.close();
     }
 
+    @Override
+    public User LoginUsers(String nickname) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "select * from tb_user where nickname=?";
+        Cursor cursor = db.rawQuery(sql,new String[]{nickname+""});
+        User user = new User();
+        user = getUserFromDB(user,cursor);
+        db.close();
+        cursor.close();
+        return user;
+    }
+
 
     private User getUserFromDB(User user, Cursor cursor){
         while (cursor.moveToNext()){

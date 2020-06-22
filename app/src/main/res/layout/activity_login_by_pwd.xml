@@ -15,12 +15,12 @@
 
 
     <EditText
-        android:layout_marginTop="200dp"
-        android:id="@+id/et_login_phonenumber"
+        android:id="@+id/et_login_nickname"
         android:layout_width="400dp"
         android:layout_height="45dp"
-        android:layout_alignBottom="@+id/bt_login_sendmessage"
-        android:layout_alignStart="@+id/et_login_password"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
         android:background="@drawable/translucenttext"
         android:gravity="center_horizontal"
         android:hint="请输入账号"
@@ -32,11 +32,11 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/et_login_phonenumber"
+        android:layout_below="@id/et_login_nickname"
         android:layout_marginTop="25dp"
         android:background="@drawable/translucenttext"
         android:gravity="center_horizontal"
-        android:hint="请输入密码或验证"
+        android:hint="请输入密码"
         android:inputType="textPassword"
         android:textColor="#fefefe" />
     <Button
@@ -48,7 +48,6 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/translucentbutton"
         android:text="登录"
-
         android:textStyle="normal"
 
         />

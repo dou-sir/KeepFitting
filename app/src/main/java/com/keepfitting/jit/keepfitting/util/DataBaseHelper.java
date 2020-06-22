@@ -9,7 +9,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public DataBaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
-    //自定义构造方法   会创建一个mynote_db作为名字的数据库
+    //自定义构造方法   会创建一个fitness_db作为名字的数据库
     public DataBaseHelper(Context context){
         super(context,"fitness_db",null,1);
     }
@@ -36,11 +36,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "userId int,figureType String,figureData String,recordDate String)");
 
         //user数据
-        db.execSQL("insert into tb_user values (0,'cxk','123','233',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,1)");
-        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (1,'dyy','123','123')");
-        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (2,'xy','123','321')");
-        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (3,'cwn','123','121')");
-        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (4,'gzh','123','131')");
+        db.execSQL("insert into tb_user values (0,'cxk','123','233',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
+        db.execSQL("insert into tb_user values (1,'dyy','123','456',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
+        db.execSQL("insert into tb_user values (2,'xy','123','453',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
+        db.execSQL("insert into tb_user values (3,'cwn','123','4512',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
+        db.execSQL("insert into tb_user values (4,'gzh','123','2545',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
+//        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (1,'dyy','123','123')");
+//        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (2,'xy','123','321')");
+//        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (3,'cwn','123','121')");
+//        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (4,'gzh','123','131')");
 
         //计划
         db.execSQL("insert into tb_goal values(0,1,45,40,'2020.6.21','6.25',1,1,'无')");

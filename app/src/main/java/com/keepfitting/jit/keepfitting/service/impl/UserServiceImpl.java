@@ -51,6 +51,16 @@ public class UserServiceImpl  implements UserService {
         }
     }
 
+    @Override
+    public int checkLogin(String nickname, String authToken) {
+        User user = userDao.LoginUsers(nickname);
+        if (null!=user.getAuthToken()&&user.getAuthToken().equals(authToken)){
+            return user.getUserID();
+        }
+        return 0;
+
+    }
+
 //
 //    @Override
 //    public boolean userRegist(User user) {

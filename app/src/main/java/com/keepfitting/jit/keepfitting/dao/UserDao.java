@@ -35,8 +35,12 @@ public interface UserDao  {
 //    public User findUserByPhone(String phone) throws Exception;
 //    //注册用户
 //    public void RegistUsers(User user);
-//    //登录
-//    public User LoginUsers(String phone);
+
+    /**账号密码登录
+     * @param
+     * @return
+     */
+    public User LoginUsers(String nickname);
 //
 //    //获取uid
 //    public int getUseruid(String phone);
