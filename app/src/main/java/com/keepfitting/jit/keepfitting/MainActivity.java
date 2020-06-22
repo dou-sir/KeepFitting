@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     //另有添加按钮
                     case R.id.nav_newgol:
-                        startActivity(new Intent(MainActivity.this,AddGoalActivity.class));
+                        //startActivity(new Intent(MainActivity.this,AddGoalActivity.class));
+                        FragmentAddGoal fragmentAddGoal=new FragmentAddGoal();
+                        fmTransaction(fragmentAddGoal);
                         break;
                     case R.id.nav_newfigure:
                         ShowFigureFragment showFigureFragment = new ShowFigureFragment();

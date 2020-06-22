@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.keepfitting.jit.keepfitting.adapter.GoalAdapter;
 import com.keepfitting.jit.keepfitting.entity.Goal;
+import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.service.impl.GoalServiceImpl;
 
 import java.util.ArrayList;
@@ -32,8 +33,9 @@ public class FragmentGoal extends Fragment implements GoalAdapter.CompleteListen
     GoalServiceImpl goalServiceImpl;
 
     // TODO: 自定义了一个userid
-    int userId=1;
+    int userId;
     GoalAdapter goalAdapter;
+    //private User user;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class FragmentGoal extends Fragment implements GoalAdapter.CompleteListen
 
 
         // TODO: 此处得到当前用户的计划
+        userId=MainActivity.userinfo.getUserID();
         goalList=goalServiceImpl.findAllGoalByUserId(userId);
 
 
@@ -109,10 +112,6 @@ public class FragmentGoal extends Fragment implements GoalAdapter.CompleteListen
 
                 int i=position;
                 //通过点击的位置position获取到这个订单
-                //TODO 得到订单后 将order对象 传入下一个Activity    Intent intent=new Intent(getActivity(),？？？.class);
-                //TODO 传入下一层的数值
-                //TODO intent.putExtra("order",order);
-                //TODO startActivity(intent);
                 Intent intent=new Intent(getActivity(),GoalDetailsActivity.class);
                 int goalId=(Integer)goalList.get(position).getGoalId();
                 intent.putExtra("goalId",goalId);
@@ -125,18 +124,18 @@ public class FragmentGoal extends Fragment implements GoalAdapter.CompleteListen
 
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                Intent intent=new Intent(getActivity(),AddGoalActivity.class);
-                intent.putExtra("userId",userId);
-                startActivity(intent);
-
-
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+////                Intent intent=new Intent(getActivity(),AddGoalActivity.class);
+////                intent.putExtra("userId",userId);
+////                startActivity(intent);
+//
+//
+//            }
+//        });
 
 
 

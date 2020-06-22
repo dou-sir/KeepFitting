@@ -35,8 +35,8 @@
         <activity android:name=".ModifyUserActivity" />
         <activity android:name=".LoginByPwdActivity" />
         <activity android:name=".GoalDetailsActivity" />
-        <activity android:name=".AddGoalActivity" />
-        <activity android:name=".GoalActivity"></activity>
+        <activity android:name=".GoalActivity" />
+        <activity android:name=".GoalAddActivity"></activity>
     </application>
 
 </manifest>

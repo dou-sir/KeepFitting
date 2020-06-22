@@ -47,6 +47,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (4,'gzh','123','131')");
 
         //计划
+
         db.execSQL("insert into tb_goal values(0,1,45,40,'2020.6.21','6.25',1,1,'无')");
         db.execSQL("insert into tb_goal values(1,1,50,45,'5.20','5.29',1,0,'无')");
         db.execSQL("insert into tb_goal values(2,1,80,70,'6.1','7.30',1,1,'无')");
@@ -58,6 +59,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("insert into tb_goal values(6,3,45,40,'2020.6.21','6.25',1,0,'111')");
         db.execSQL("insert into tb_goal values(7,3,50,45,'2020.5.20','5.29',2,1,'222')");
         db.execSQL("insert into tb_goal values(8,3,80,70,'2021.6.1','7.30',1,0,'333')");
+
+        db.execSQL("insert into tb_goal values(9,0,45,40,'2020-6-21','2020-6-25',1,0,'cxk')");
+        db.execSQL("insert into tb_goal values(10,0,50,45,'2020-5-20','2020-5-29',2,1,'cxk')");
+        db.execSQL("insert into tb_goal values(11,0,80,70,'2021-6-1','2020-7-30',1,0,'cxk')");
 
         //身材数据
         db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','70.2','06-21')");

@@ -7,11 +7,11 @@
             android:title="主页"/>
         <item
             android:id="@+id/nav_mygoal"
-            android:icon="@drawable/fitness"
+            android:icon="@drawable/goal"
             android:title="我的计划"/>
         <item
             android:id="@+id/nav_newgol"
-            android:icon="@drawable/fitness"
+            android:icon="@drawable/addgoal"
             android:title="新增计划"/>
         <item
             android:id="@+id/nav_newfigure"
