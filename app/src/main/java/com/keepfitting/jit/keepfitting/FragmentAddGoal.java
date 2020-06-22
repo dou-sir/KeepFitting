@@ -222,7 +222,7 @@ public class FragmentAddGoal extends Fragment {
                 }else if(textFlag==true&&startdataFlag==true&&goaldataFlag==true&&starttimeFlag==true&&endtimeFlag==false){
                     Toast.makeText(getActivity(),"结束时间不能为空!",Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getActivity(),"除备注外不能为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"除备注外不能为空!!",Toast.LENGTH_SHORT).show();
                 }
 
 
