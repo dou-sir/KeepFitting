@@ -29,6 +29,8 @@ public class User implements Serializable {
     private float consumeCC;
     //静态能量消耗值
     private float consumeREE;
+    //活动系数
+    private  float dayrate;
     //标准体重
     private float standardWeight;
     //最高心率
@@ -40,7 +42,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int userID, String nickname, String authToken, String phone, int sex, String birthday, String high, float BMI, float intakeCC, float consumeCC, float consumeREE, float standardWeight, float maxHeart, int ustate) {
+    public User(int userID, String nickname, String authToken, String phone, int sex, String birthday, String high, float BMI, float intakeCC, float consumeCC, float consumeREE, float dayrate, float standardWeight, float maxHeart, int ustate) {
         this.userID = userID;
         this.nickname = nickname;
         this.authToken = authToken;
@@ -52,6 +54,7 @@ public class User implements Serializable {
         this.intakeCC = intakeCC;
         this.consumeCC = consumeCC;
         this.consumeREE = consumeREE;
+        this.dayrate = dayrate;
         this.standardWeight = standardWeight;
         this.maxHeart = maxHeart;
         this.ustate = ustate;
@@ -71,6 +74,7 @@ public class User implements Serializable {
                 ", intakeCC=" + intakeCC +
                 ", consumeCC=" + consumeCC +
                 ", consumeREE=" + consumeREE +
+                ", dayrate=" + dayrate +
                 ", standardWeight=" + standardWeight +
                 ", maxHeart=" + maxHeart +
                 ", ustate=" + ustate +
@@ -163,6 +167,14 @@ public class User implements Serializable {
 
     public void setConsumeREE(float consumeREE) {
         this.consumeREE = consumeREE;
+    }
+
+    public float getDayrate() {
+        return dayrate;
+    }
+
+    public void setDayrate(float dayrate) {
+        this.dayrate = dayrate;
     }
 
     public float getStandardWeight() {

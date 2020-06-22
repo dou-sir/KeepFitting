@@ -7,10 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.NumberPicker;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.keepfitting.jit.keepfitting.R;
+import com.keepfitting.jit.keepfitting.entity.User;
+import com.keepfitting.jit.keepfitting.service.UserService;
+import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 
 
 public class Figure00Fragment extends Fragment implements NumberPicker.OnValueChangeListener,NumberPicker.OnScrollListener,NumberPicker.Formatter{
@@ -18,12 +24,17 @@ public class Figure00Fragment extends Fragment implements NumberPicker.OnValueCh
     NumberPicker bigPicker;
     NumberPicker smallPicker;
 
+    private UserService userService;
+    RadioGroup rg_test;
+    Button btn_test;
+    TextView tv_test;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_figure00, container, false);
-
+        userService = new UserServiceImpl(getContext());
         init(view);
         return view;
 
@@ -33,6 +44,8 @@ public class Figure00Fragment extends Fragment implements NumberPicker.OnValueCh
 
         bigPicker = view.findViewById(R.id.BigPicker);
         smallPicker = view.findViewById(R.id.SmallPicker);
+
+        setTest(view);
 
         bigPicker.setFormatter(this);
         bigPicker.setOnValueChangedListener(this);
@@ -80,6 +93,49 @@ public class Figure00Fragment extends Fragment implements NumberPicker.OnValueCh
                         .show();
                 break;
         }
+    }
+
+    private void setTest(View view){
+        rg_test = view.findViewById(R.id.rg_test);
+        btn_test = view.findViewById(R.id.btn_test);
+        tv_test = view.findViewById(R.id.tv_test);
+
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = new User();
+                switch (rg_test.getCheckedRadioButtonId()){
+                    case R.id.rb_1 :
+                        user = userService.findUserByUserID(1);
+                        tv_test.setText(user.toString());
+                        break;
+                    case R.id.rb_2 :
+                        user = userService.findUserByPhone("121");
+                        tv_test.setText(user.toString());
+                        break;
+                    case R.id.rb_3 :
+                        user = userService.findUserByUstate();
+                        tv_test.setText(user.toString());
+                        break;
+                    case R.id.rb_4 :
+                        user.setPhone("BLM!");
+                        user = userService.addUser(user);
+                        tv_test.setText(user.toString());
+                        break;
+                    case R.id.rb_5 :
+                        user.setNickname("nmslcxk");
+                        user.setAuthToken("233");
+                        user.setUstate(0);
+                        String flag = "flase";
+                        if(userService.modifyUser(user)) flag="true";
+                        tv_test.setText(flag+userService.findUserByUserID(0).toString());
+                        break;
+
+                    default:tv_test.setText("NOTHING");
+                }
+            }
+        });
+
     }
 
 

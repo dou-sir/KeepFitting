@@ -31,7 +31,7 @@ import java.util.List;
  * Created by 14032 on 2020/6/18.
  */
 
-public class ChartUtils extends LineChart {
+public class ChartUtils extends CombinedChart{
 
     public static int dayValue=0;
     public static int monthValue=2;
@@ -41,7 +41,7 @@ public class ChartUtils extends LineChart {
     private static YAxis rightYaxis;           //右侧Y轴
     private static Legend legend;              //图例
     private static LimitLine limitLine;        //限制线
-//    PointF downPoint = new PointF();
+    PointF downPoint = new PointF();
 //
 //    //弱引用覆盖物对象,防止内存泄漏,不被回收
 //    private static WeakReference<DetailsMarkerView> mDetailsReference;
@@ -92,7 +92,7 @@ public class ChartUtils extends LineChart {
         xAxis.setAxisLineWidth(3f);
         leftYAxis.setAxisLineWidth(3f);
         //x轴文字斜着
-        xAxis.setLabelRotationAngle(-60);
+        xAxis.setLabelRotationAngle(-30);
 
         //轴文字大小
         xAxis.setTextSize(15f);
@@ -131,8 +131,9 @@ public class ChartUtils extends LineChart {
         chart.moveViewToX(size-1);
 
         Description description = new Description();
-        description.setText("体重");//需要展示的内容
+        description.setText("kg");//需要展示的内容
         description.setTextSize(50f);
+//        description.setPosition(0,0);
         description.setEnabled(true);
         chart.setDescription(description);
 
@@ -226,33 +227,36 @@ public class ChartUtils extends LineChart {
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
         for (int i = size-1; i >= 0; i--) {
             monthValues[i] = formatter.format(new Date(currentTime));//TimeUtils.dateToString(currentTime, TimeUtils.dateFormat_month);
+            if(monthValues[i].equals("06-10")){
+                monthValues[i] = "20/06-10";
+            }
             currentTime -= (24 * 60 * 60 * 1000);
         }
         return monthValues;
     }
 
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        getParent().requestDisallowInterceptTouchEvent(true);// 用getParent去请求,
-//        // 不拦截
-//        return super.dispatchTouchEvent(ev);
-//    }
-//
-//    @Override
-//    public boolean onTouchEvent(MotionEvent evt) {
-//        switch (evt.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                downPoint.x = evt.getX();
-//                downPoint.y = evt.getY();
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                if (getScaleX() > 1 && Math.abs(evt.getX() - downPoint.x) > 5) {
-//                    getParent().requestDisallowInterceptTouchEvent(true);
-//                }
-//                break;
-//        }
-//        return super.onTouchEvent(evt);
-//    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        getParent().requestDisallowInterceptTouchEvent(true);// 用getParent去请求,
+        // 不拦截
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                downPoint.x = event.getX();
+                downPoint.y = event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (getScaleX() > 1 && Math.abs(event.getX() - downPoint.x) > 5) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
 
 //    /**
 //     * 所有覆盖物是否为空

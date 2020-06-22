@@ -3,38 +3,84 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical" >
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:layout_centerInParent="true"
-    android:layout_gravity="center_horizontal" >
-
-    <NumberPicker
-        android:id="@+id/BigPicker"
-        android:layout_width="30dp"
-        android:layout_height="180dp" />
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="  .  " />
+        android:padding="10dp"
+        android:layout_gravity="center_horizontal" >
 
-    <NumberPicker
-        android:id="@+id/SmallPicker"
-        android:layout_width="30dp"
-        android:layout_height="180dp" />
+        <NumberPicker
+            android:id="@+id/BigPicker"
+            android:layout_width="30dp"
+            android:layout_height="180dp" />
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="  .  " />
+
+        <NumberPicker
+            android:id="@+id/SmallPicker"
+            android:layout_width="30dp"
+            android:layout_height="180dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="5dp"
+            android:textStyle="bold"
+            android:text="   Kg" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:paddingTop="5dp"
-        android:textStyle="bold"
-        android:text="   Kg" />
-</LinearLayout>
+        android:layout_below="@+id/ll_test"
+        android:orientation="vertical">
+        <RadioGroup
+            android:id="@+id/rg_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RadioButton
+                android:id="@+id/rb_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="findUserByUserID:1"/>
+            <RadioButton
+                android:id="@+id/rb_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="findUserByPhone" />
+            <RadioButton
+                android:id="@+id/rb_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="findUserByUstate" />
+            <RadioButton
+                android:id="@+id/rb_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="addUser:" />
+            <RadioButton
+                android:id="@+id/rb_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="modifyUser:0" />
+        </RadioGroup>
+        <Button
+            android:id="@+id/btn_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"/>
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </RelativeLayout>
