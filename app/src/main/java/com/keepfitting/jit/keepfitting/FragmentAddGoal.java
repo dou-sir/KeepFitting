@@ -1,9 +1,10 @@
 package com.keepfitting.jit.keepfitting;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,8 +19,11 @@ import com.keepfitting.jit.keepfitting.service.impl.GoalServiceImpl;
 
 import java.util.Calendar;
 
-public class AddGoalActivity extends AppCompatActivity {
+/**
+ * Created by admin on 2020/6/22.
+ */
 
+public class FragmentAddGoal extends Fragment {
     RadioGroup group;
     RadioButton jf;
     RadioButton zj;
@@ -43,37 +47,38 @@ public class AddGoalActivity extends AppCompatActivity {
     String text;
     int a;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_goal);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.activity_add_goal, null);
 
-        group=findViewById(R.id.rg);
-        jf=findViewById(R.id.cb_jf);
-        zj=findViewById(R.id.cb_zj);
-        ss=findViewById(R.id.cb_ss);
-        zhushi=findViewById(R.id.tv_zhushi);
-        start=findViewById(R.id.bu_start);
-        end=findViewById(R.id.bu_end);
-        starttime=findViewById(R.id.et_startTime);
-        endtime=findViewById(R.id.et_endTime);
-        add=findViewById(R.id.bu_add);
-        startdata=findViewById(R.id.et_startData);
-        goaldata=findViewById(R.id.et_goalData);
-        goaldescribe=findViewById(R.id.et_goalDescribe);
-        back=findViewById(R.id.iv_back);
 
-        goalServiceImpl=new GoalServiceImpl(AddGoalActivity.this);
 
-        Intent intent = getIntent();
-        final int userId = intent.getIntExtra("userId", 0);
 
+        group=view.findViewById(R.id.rg);
+        jf=view.findViewById(R.id.cb_jf);
+        zj=view.findViewById(R.id.cb_zj);
+        ss=view.findViewById(R.id.cb_ss);
+        zhushi=view.findViewById(R.id.tv_zhushi);
+        start=view.findViewById(R.id.bu_start);
+        end=view.findViewById(R.id.bu_end);
+        starttime=view.findViewById(R.id.et_startTime);
+        endtime=view.findViewById(R.id.et_endTime);
+        add=view.findViewById(R.id.bu_add);
+        startdata=view.findViewById(R.id.et_startData);
+        goaldata=view.findViewById(R.id.et_goalData);
+        goaldescribe=view.findViewById(R.id.et_goalDescribe);
+        back=view.findViewById(R.id.iv_back);
+
+        goalServiceImpl=new GoalServiceImpl(getActivity());
+
+        //Intent intent = getIntent();
+        // final int userId = intent.getIntExtra("userId", 0);
+        final int userId = MainActivity.userinfo.getUserID();
         start.setOnClickListener(new View.OnClickListener() {
             Calendar c = Calendar.getInstance();
 
             @Override
             public void onClick(View v) {
-                new DoubleDatePickerDialog(AddGoalActivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
+                new DoubleDatePickerDialog(getActivity(), 0, new DoubleDatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
@@ -92,7 +97,7 @@ public class AddGoalActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                new DoubleDatePickerDialog(AddGoalActivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
+                new DoubleDatePickerDialog(getActivity(), 0, new DoubleDatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
@@ -115,7 +120,7 @@ public class AddGoalActivity extends AppCompatActivity {
 
             private void selectRadioBtn() {
 
-                RadioButton radioButton =findViewById(group.getCheckedRadioButtonId());
+                RadioButton radioButton =view.findViewById(group.getCheckedRadioButtonId());
                 text = radioButton.getText().toString();
 
             }
@@ -205,52 +210,22 @@ public class AddGoalActivity extends AppCompatActivity {
 
                     goalServiceImpl.addGoal(goal);
 
-                    Toast.makeText(AddGoalActivity.this,"添加成功!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"添加成功!",Toast.LENGTH_SHORT).show();
                 }else if(textFlag==false&&startdataFlag==true&&goaldataFlag==true&&starttimeFlag==true&&endtimeFlag==true){
-                    Toast.makeText(AddGoalActivity.this,"类型不能为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"类型不能为空!",Toast.LENGTH_SHORT).show();
                 }else if(textFlag==true&&startdataFlag==false&&goaldataFlag==true&&starttimeFlag==true&&endtimeFlag==true){
-                    Toast.makeText(AddGoalActivity.this,"起始数据不能为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"起始数据不能为空!",Toast.LENGTH_SHORT).show();
                 }else if(textFlag==true&&startdataFlag==true&&goaldataFlag==false&&starttimeFlag==true&&endtimeFlag==true){
-                    Toast.makeText(AddGoalActivity.this,"目标数据不能为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"目标数据不能为空!",Toast.LENGTH_SHORT).show();
                 }else if(textFlag==true&&startdataFlag==true&&goaldataFlag==true&&starttimeFlag==false&&endtimeFlag==true){
-                    Toast.makeText(AddGoalActivity.this,"开始时间不能为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"开始时间不能为空!",Toast.LENGTH_SHORT).show();
                 }else if(textFlag==true&&startdataFlag==true&&goaldataFlag==true&&starttimeFlag==true&&endtimeFlag==false){
-                    Toast.makeText(AddGoalActivity.this,"结束时间不能为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"结束时间不能为空!",Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(AddGoalActivity.this,"除备注外不能为空!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"除备注外不能为空!",Toast.LENGTH_SHORT).show();
                 }
 
 
-//                Goal goal=new Goal();
-//                goal.setUserId(3);
-//                goal.setStartData(Float.parseFloat(startdata.getText().toString()));
-//                goal.setGoalData(Float.parseFloat(goaldata.getText().toString()));
-//                goal.setStartTime(starttime.getText().toString());
-//                goal.setEndTime(endtime.getText().toString());
-//                goal.setGoalDescribe(goaldescribe.getText().toString());
-//                goal.setGoalStatus(0);
-//                switch (text){
-//                    case "减肥":
-//                        a=0;
-//                        break;
-//                    case"增肌":
-//                        a=1;
-//                        break;
-//                    case "塑身":
-//                        a=2;
-//                        break;
-//
-//                }
-//                goal.setGoalType(a);
-//
-//
-//
-//                goalServiceImpl.addGoal(goal);
-
-
-
-
-
 
 
 
@@ -258,14 +233,23 @@ public class AddGoalActivity extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                getActivity().finish();
+//            }
+//        });
 
-                finish();
-            }
-        });
+
+        return view;
     }
+
+
+
+
+
+
 
 
 }
