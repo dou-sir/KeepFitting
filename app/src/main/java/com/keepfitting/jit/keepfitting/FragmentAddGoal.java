@@ -233,13 +233,7 @@ public class FragmentAddGoal extends Fragment {
             }
         });
 
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                getActivity().finish();
-//            }
-//        });
+
 
 
         return view;
