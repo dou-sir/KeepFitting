@@ -71,7 +71,7 @@ public class LoginByPwdActivity extends AppCompatActivity {
                         startActivity(intent);
                         LoginByPwdActivity.this.finish();
                     }else{
-                        System.out.println("用户名或密码错误！" );
+                        System.out.println("用户名或密码错误" );
 
                     }
                 }else{
