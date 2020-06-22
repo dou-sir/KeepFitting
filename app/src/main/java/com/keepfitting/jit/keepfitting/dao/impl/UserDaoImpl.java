@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     //模拟数据生成
     static {
         userList = new ArrayList<User>();
-     userList.add(new User(1,"a","abc","18551319687",1,"177","77",2,3,2,2,6,5,41));
+     userList.add(new User(1,"gu","zhihao","18551319687",1,"1999年7月22日","177CM",66,3000,2000,500,66,100,1));
    //     userList.add(new User(1,"adc","sxc","1111",0,"吃书我","d"));
 
 
