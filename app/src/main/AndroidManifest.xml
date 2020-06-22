@@ -36,7 +36,13 @@
         <activity android:name=".LoginByPwdActivity" />
         <activity android:name=".GoalDetailsActivity" />
         <activity android:name=".GoalActivity" />
-        <activity android:name=".GoalAddActivity"></activity>
+        <activity android:name=".GoalAddActivity" />
+        <activity android:name=".ShowFoodActivity" />
+        <activity android:name=".ShowSportActivity" />
+        <activity android:name=".AddFoodConfirmActivity" />
+        <activity android:name=".AddSportConfirmActivity" />
+        <activity android:name=".FoodConditionActivity" />
+        <activity android:name=".SportConditionActivity"></activity>
     </application>
 
 </manifest>

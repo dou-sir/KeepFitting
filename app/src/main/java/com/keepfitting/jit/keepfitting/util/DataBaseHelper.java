@@ -70,6 +70,96 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','66.5','01-01')");
         db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','65.7','12-21')");
 
+
+        /**
+         *     ----------XY-----------
+         */
+        //4.食物热量信息表
+        db.execSQL("create table if not exists tb_food(foodId integer primary key autoincrement,"+
+                "name String, calory int, foodImg int)");
+        //5、运动热量记录表
+        db.execSQL("create table if not exists tb_sport(sportId integer primary key autoincrement,"+
+                "name String, calory int, sportImg int)");
+        //6.每日饮食表
+        db.execSQL("create table if not exists tb_dailyfood(userId integer,"+
+                "foodType int, date String,foodsID String,foodsWeight String,needCal int)");
+        //7.每日运动表
+        db.execSQL("create table if not exists tb_dailysport(userId integer,"+
+                "date String,sportsID String,sportsTime String)");
+
+
+        //添加食物数据
+        db.execSQL("insert into tb_food values(0,'米饭',116,0)");
+        db.execSQL("insert into tb_food values(1,'乳酸菌面包',306,1)");
+        db.execSQL("insert into tb_food values(2,'鸡蛋',144,2)");
+        db.execSQL("insert into tb_food values(3,'苹果',53,3)");
+        db.execSQL("insert into tb_food values(4,'蜂蜜',321,4)");
+        db.execSQL("insert into tb_food values(5,'酸奶',72,5)");
+        db.execSQL("insert into tb_food values(6,'豆浆',31,6)");
+        db.execSQL("insert into tb_food values(7,'牛奶',54,7)");
+        db.execSQL("insert into tb_food values(8,'玉米',112,8)");
+        db.execSQL("insert into tb_food values(9,'西瓜',31,9)");
+        db.execSQL("insert into tb_food values(10,'桃子',42,10)");
+        db.execSQL("insert into tb_food values(11,'橙子',48,11)");
+        db.execSQL("insert into tb_food values(12,'燕麦片',338,12)");
+        db.execSQL("insert into tb_food values(13,'红薯',61,13)");
+        db.execSQL("insert into tb_food values(14,'小米粥',46,14)");
+        db.execSQL("insert into tb_food values(15,'马铃薯',81,15)");
+        db.execSQL("insert into tb_food values(16,'白粥',30,16)");
+        db.execSQL("insert into tb_food values(17,'炸猪排',215,17)");
+        db.execSQL("insert into tb_food values(18,'清煎牛排',118,18)");
+        db.execSQL("insert into tb_food values(19,'凉面',167,19)");
+        db.execSQL("insert into tb_food values(20,'清炒芹菜',44,20)");
+        db.execSQL("insert into tb_food values(21,'西葫芦',19,21)");
+        db.execSQL("insert into tb_food values(22,'鸡蛋羹',62,22)");
+        db.execSQL("insert into tb_food values(23,'大白菜',20,23)");
+        db.execSQL("insert into tb_food values(24,'菠菜',28,24)");
+        db.execSQL("insert into tb_food values(25,'卷心菜',24,25)");
+        db.execSQL("insert into tb_food values(26,'鸡胸脯肉',133,26)");
+        db.execSQL("insert into tb_food values(27,'草鱼',113,27)");
+        db.execSQL("insert into tb_food values(28,'毛豆',131,28)");
+        db.execSQL("insert into tb_food values(29,'丝瓜',20,29)");
+        db.execSQL("insert into tb_food values(30,'酸菜鱼',98,30)");
+        db.execSQL("insert into tb_food values(31,'牛肉',106,31)");
+        db.execSQL("insert into tb_food values(32,'鲫鱼',108,32)");
+        db.execSQL("insert into tb_food values(33,'基围虾',101,33)");
+        db.execSQL("insert into tb_food values(34,'猪肉',155,34)");
+        db.execSQL("insert into tb_food values(35,'白斩鸡',172,35)");
+        db.execSQL("insert into tb_food values(36,'牛肚',72,36)");
+        db.execSQL("insert into tb_food values(37,'兔肉',102,37)");
+        db.execSQL("insert into tb_food values(38,'猪蹄',260,38)");
+
+        //添加运动数据
+        db.execSQL("insert into tb_sport values(0,'走路(慢)',116,0)");
+        db.execSQL("insert into tb_sport values(1,'走路(快)',356,1)");
+        db.execSQL("insert into tb_sport values(2,'跑步',490,2)");
+        db.execSQL("insert into tb_sport values(3,'跳绳',517,3)");
+        db.execSQL("insert into tb_sport values(4,'游泳',490,4)");
+        db.execSQL("insert into tb_sport values(5,'自行车',517,5)");
+        db.execSQL("insert into tb_sport values(6,'健身操',446,6)");
+        db.execSQL("insert into tb_sport values(7,'瑜伽',178,7)");
+        db.execSQL("insert into tb_sport values(8,'足球',535,8)");
+        db.execSQL("insert into tb_sport values(9,'篮球',490,9)");
+        db.execSQL("insert into tb_sport values(10,'排球',419,10)");
+        db.execSQL("insert into tb_sport values(11,'羽毛球',401,11)");
+        db.execSQL("insert into tb_sport values(12,'乒乓球',267,12)");
+
+        //添加饮食数据
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-16','0,1,2','188,82,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-16','15,12,20','18,80,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-16','10,13,24','50,85,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-19','0,1,2','188,82,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-19','15,12,20','18,80,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-19','10,13,24','50,85,120',1500)");
+
+        //添加运动数据
+        db.execSQL("insert into tb_dailysport values(1,'2020-06-16','0,1,2','60,60,60')");
+
+        db.execSQL("insert into tb_dailysport values(1,'2020-06-19','5,6,7','45,30,60')");
+
+
+
     }
 
     @Override

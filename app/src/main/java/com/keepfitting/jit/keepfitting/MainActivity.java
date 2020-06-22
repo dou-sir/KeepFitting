@@ -102,10 +102,12 @@ public class MainActivity extends AppCompatActivity {
                         fmTransaction(figure01Fragment);
                         break;
                     case R.id.nav_showfoodCC:
-                        //todo
+                        Intent intent = new Intent(MainActivity.this,FoodConditionActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_showconusumeCC:
-                        //todo
+                        Intent intent1 = new Intent(MainActivity.this,SportConditionActivity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.nav_showself:
                         //todo

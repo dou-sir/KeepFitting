@@ -34,4 +34,23 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+
+
+    <!--XY-->
+    <style name="DialogActivityTheme" parent="Theme.AppCompat.Dialog">
+        <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+                <item name="android:windowIsFloating">false</item>
+                <!-- 是否半透明 -->
+                <item name="android:windowIsTranslucent">false</item>
+                <!-- 是否显示title -->
+        <item name="windowNoTitle">true</item>
+                <!-- 设置dialog的背景 -->
+        <!--        <item name="android:windowBackground">@drawable/bg</item>-->
+                <!-- 背景是否模糊显示 -->
+                <item name="android:backgroundDimEnabled">false</item>
+
+    </style>
+
 </resources>
