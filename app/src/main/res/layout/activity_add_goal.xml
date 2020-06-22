@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.keepfitting.jit.keepfitting.AddGoalActivity"
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/back"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="计划类型:"
+            android:textSize="20dp"
+            android:textColor="#c10e0e"/>
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/cb_jf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="减肥"/>
+            <RadioButton
+                android:id="@+id/cb_zj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="力量"/>
+            <RadioButton
+                android:id="@+id/cb_ss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="塑身"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="起始数据："
+            android:textSize="20dp"
+            android:textColor="#9a1e4ec7"/>
+        <EditText
+            android:id="@+id/et_startData"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:id="@+id/tv_zhushi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="目标数据："
+            android:textSize="20dp"
+            android:textColor="#9a1e4ec7"/>
+        <EditText
+            android:id="@+id/et_goalData"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            />
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始时间："
+            android:textSize="20dp"
+            android:textColor="#12d56d"/>
+        <TextView
+            android:id="@+id/et_startTime"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            />
+        <Button
+            android:id="@+id/bu_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择日期"/>
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="结束时间："
+            android:textSize="20dp"
+            android:textColor="#12d56d"/>
+        <TextView
+            android:id="@+id/et_endTime"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            />
+        <Button
+            android:id="@+id/bu_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择日期"/>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注："
+            android:textSize="20dp"
+            android:textColor="#d70eda"/>
+        <EditText
+            android:id="@+id/et_goalDescribe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bu_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加"
+            />
+    </LinearLayout>
+
+</LinearLayout>

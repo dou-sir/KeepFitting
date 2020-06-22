@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
+    android:background="@drawable/plan">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
+
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的计划"
+            android:textSize="40dp"
+            android:textColor="#0b0c0d"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_goalList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:divider="@color/colorAccent"
+        android:fadingEdge="none"
+        android:headerDividersEnabled="false"
+        android:footerDividersEnabled="false"
+        android:dividerHeight="10dp"
+        >
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+
+        >
+
+
+        <Button
+            android:id="@+id/bu_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加计划"
+            />
+    </LinearLayout>
+
+</LinearLayout>
