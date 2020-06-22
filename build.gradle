@@ -29,6 +29,8 @@ allprojects {
         maven{ url 'https://maven.aliyun.com/repository/google/'}
         maven{ url 'https://maven.aliyun.com/repository/jcenter/'}
         maven { url "https://jitpack.io" }//MPAndroidChart
+        maven { url 'https://jitpack.io' }//MPAndroidChart
+
         google()
         jcenter{
             url 'http://jcenter.bintray.com'

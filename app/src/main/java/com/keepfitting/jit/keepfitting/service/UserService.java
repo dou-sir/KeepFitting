@@ -33,12 +33,17 @@ public interface UserService {
      */
     public boolean modifyUser(User user) ;
 
+/**
+ *
+ * 登录操作
+ */
+    public int checkLogin(String nickname, String authToken);
+
+
 
     //public boolean userRegist(User user);
     //重复
 //    public List<User> findUserByPhone(String phone);
-    //登录操作
-  // public boolean checkLogin(String phone);
 
     //获取uid
     //public int getUid(String uname);
