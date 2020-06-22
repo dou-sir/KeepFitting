@@ -2,24 +2,48 @@ package com.keepfitting.jit.keepfitting.dao;
 
 import com.keepfitting.jit.keepfitting.entity.User;
 
-/**
- * Created by 顾志豪 on 2020/6/19.
- */
 
 public interface UserDao  {
 
-    public User findUserByPhone(String phone) throws Exception;
-    //注册用户
-    public void RegistUsers(User user);
-    //登录
-    public User LoginUsers(String phone);
+    /**
+     * 查询单个用户
+     */
+    public User findUserByUserID(int userID) ;
+    public User findUserByPhone(String phone) ;
 
-    //获取uid
-    public int getUseruid(String phone);
+    /**
+     * 查询系统中已登录的用户ustate=1
+     * @return
+     */
+    public User findUserByUstate() ;
 
-    //根据uid获取生日
-    public String getUserBirth(int uid);
+    /**
+     * 添加用户
+     * @return
+     */
+    public User addUser(User user) ;
 
-    //判断用户是否存在
-    public User ifUserHave(String uname);
+    /**
+     * 修改用户
+     * @return
+     */
+    public void modifyUser(User user) ;
+
+
+
+
+//    public User findUserByPhone(String phone) throws Exception;
+//    //注册用户
+//    public void RegistUsers(User user);
+//    //登录
+//    public User LoginUsers(String phone);
+//
+//    //获取uid
+//    public int getUseruid(String phone);
+//
+//    //根据uid获取生日
+//    public String getUserBirth(int uid);
+//
+//    //判断用户是否存在
+//    public User ifUserHave(String uname);
 }
