@@ -34,10 +34,12 @@ public class UserServiceImpl  implements UserService {
     @Override
     public User addUser(User user) {
         if(userDao.findUserByPhone(user.getPhone()).getNickname()!=null)
-            return new User();
+            return userDao.findUserByPhone(user.getPhone());
 
         user.setNickname(user.getPhone());
-        return userDao.addUser(user);
+        userDao.addUser(user);
+        return userDao.findUserByPhone(user.getPhone());
+
     }
 
     @Override
