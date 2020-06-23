@@ -4,14 +4,42 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lc_chart"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:background="@drawable/bg9"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg9">
+        <TextView
+            android:id="@+id/tv_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"
+            android:layout_gravity="center"
+            android:text="CM"
+            android:textStyle="bold"
+            android:textSize="10dp"
+            android:textColor="#8B0000"/>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lc_chart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"  />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/smssdk_black"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="最近一次记录时间为："/>
+    <TextView
+        android:id="@+id/tv_recenttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:textSize="20dp"
+        android:text="暂无数据" />
 
 
 </LinearLayout>

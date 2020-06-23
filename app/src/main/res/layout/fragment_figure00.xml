@@ -1,87 +1,130 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical" >
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/ll_test"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="10dp"-->
-        <!--android:layout_gravity="center_horizontal" >-->
-
-        <!--<NumberPicker-->
-            <!--android:id="@+id/BigPicker"-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="180dp" />-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:textStyle="bold"-->
-            <!--android:textSize="20dp"-->
-            <!--android:text="  .  " />-->
-
-        <!--<NumberPicker-->
-            <!--android:id="@+id/SmallPicker"-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="180dp" />-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:paddingTop="5dp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:text="   Kg" />-->
-    <!--</LinearLayout>-->
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2_1"   >
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_test"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:paddingBottom="100dp"
         android:orientation="vertical">
-        <RadioGroup
-            android:id="@+id/rg_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RadioButton
-                android:id="@+id/rb_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="findUserByUserID:1"/>
-            <RadioButton
-                android:id="@+id/rb_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="findUserByPhone" />
-            <RadioButton
-                android:id="@+id/rb_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="findUserByUstate" />
-            <RadioButton
-                android:id="@+id/rb_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="addUser:" />
-            <RadioButton
-                android:id="@+id/rb_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="modifyUser:0" />
-        </RadioGroup>
-        <Button
-            android:id="@+id/btn_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="test"/>
         <TextView
-            android:id="@+id/tv_test"
+            android:id="@+id/tv_figureTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/smssdk_black"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="您最近一次记录体重"/>
+        <TextView
+            android:id="@+id/tv_recent_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="13dp"
+            android:text="上次记录时间：2020-20-20" />
+        <TextView
+            android:id="@+id/tv_figureNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#512939"
+            android:textStyle="bold"
+            android:textSize="50dp"
+            android:text="60.0"/>
+        <Button
+            android:id="@+id/btn_addfigure"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_btn"
+            android:text="添加"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="#fff"/>
     </LinearLayout>
-
 </RelativeLayout>
+
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_test"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="10dp"-->
+    <!--android:layout_gravity="center_horizontal" >-->
+
+    <!--<NumberPicker-->
+    <!--android:id="@+id/BigPicker"-->
+    <!--android:layout_width="30dp"-->
+    <!--android:layout_height="180dp" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textSize="20dp"-->
+    <!--android:text="  .  " />-->
+
+    <!--<NumberPicker-->
+    <!--android:id="@+id/SmallPicker"-->
+    <!--android:layout_width="30dp"-->
+    <!--android:layout_height="180dp" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:paddingTop="5dp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:text="   Kg" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/ll_test"-->
+    <!--android:orientation="vertical">-->
+    <!--<RadioGroup-->
+    <!--android:id="@+id/rg_test"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/rb_1"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="findUserByUserID:1"/>-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/rb_2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="findUserByPhone" />-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/rb_3"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="findUserByUstate" />-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/rb_4"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="addUser:" />-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/rb_5"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="modifyUser:0" />-->
+    <!--</RadioGroup>-->
+    <!--<Button-->
+    <!--android:id="@+id/btn_test"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="test"/>-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_test"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
+

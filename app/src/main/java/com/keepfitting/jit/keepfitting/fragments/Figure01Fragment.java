@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -14,6 +15,8 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.keepfitting.jit.keepfitting.DetailsMarkerView;
 import com.keepfitting.jit.keepfitting.R;
+import com.keepfitting.jit.keepfitting.service.UserService;
+import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 import com.keepfitting.jit.keepfitting.util.ChartUtils;
 
 import java.util.ArrayList;
@@ -21,17 +24,40 @@ import java.util.List;
 
 public class Figure01Fragment extends Fragment {
 
+    private TextView tv_unit;
     private LineChart lc_chart;
+    private UserService userService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.show_figure00, container, false);
 
-        init(view);
+        View view;
+        Bundle bundle = getArguments();
+        if (null != bundle &&bundle.getString("flag").equals("show")){
+            view = inflater.inflate(R.layout.show_figure00, container, false);
+            initShowView(view);
+        }else {
+            view = inflater.inflate(R.layout.fragment_figure00, container, false);
+            initEditView(view);
+        }
+        userService = new UserServiceImpl(getContext());
+
         return view;
 
+    }
+
+    private void initEditView(View view){
+
+    }
+
+    private void initShowView(View view){
+        tv_unit = view.findViewById(R.id.tv_unit);
+        lc_chart = view.findViewById(R.id.lc_chart);
+
+        ChartUtils.initChart(lc_chart, getData().size(),getContext());
+        ChartUtils.notifyDataSetChanged(lc_chart, getData());
     }
 
     private void init(View view) {

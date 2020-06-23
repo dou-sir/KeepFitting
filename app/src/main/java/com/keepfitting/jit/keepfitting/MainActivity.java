@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent();
+                //可用bundle或intent传值
                 switch (item.getItemId()){
                     case R.id.nav_home:
                         //todo 切换fragment
@@ -94,20 +97,22 @@ public class MainActivity extends AppCompatActivity {
                         fmTransaction(fragmentAddGoal);
                         break;
                     case R.id.nav_newfigure:
-                        ShowFigureFragment showFigureFragment = new ShowFigureFragment();
-                        fmTransaction(showFigureFragment);
+                        ShowFigureFragment newFigureFragment = new ShowFigureFragment();
+                        fmTransaction(newFigureFragment);
                         break;
                     case R.id.nav_showfigure:
-                        Figure01Fragment figure01Fragment = new Figure01Fragment();
-                        fmTransaction(figure01Fragment);
+                        ShowFigureFragment showFigureFragment = new ShowFigureFragment();
+                        bundle.putString("flag","show");
+                        showFigureFragment.setArguments(bundle);
+                        fmTransaction(showFigureFragment);
                         break;
                     case R.id.nav_showfoodCC:
-                        Intent intent = new Intent(MainActivity.this,FoodConditionActivity.class);
+                        intent = new Intent(MainActivity.this,FoodConditionActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.nav_showconusumeCC:
-                        Intent intent1 = new Intent(MainActivity.this,SportConditionActivity.class);
-                        startActivity(intent1);
+                        intent = new Intent(MainActivity.this,SportConditionActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_showself:
                         //todo
