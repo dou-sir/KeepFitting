@@ -115,12 +115,16 @@ public class MainActivity extends AppCompatActivity {
                         fmTransaction(fragmentAddGoal);
                         break;
                     case R.id.nav_newfigure:
-                        ShowFigureFragment showFigureFragment = new ShowFigureFragment();
-                        fmTransaction(showFigureFragment);
+                        ShowFigureFragment newFigureFragment = new ShowFigureFragment();
+                        fmTransaction(newFigureFragment);
                         break;
                     case R.id.nav_showfigure:
-                        Figure01Fragment figure01Fragment = new Figure01Fragment();
-                        fmTransaction(figure01Fragment);
+                        ShowFigureFragment showFigureFragment = new ShowFigureFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("flag","show");
+                        showFigureFragment.setArguments(bundle);
+
+                        fmTransaction(showFigureFragment);
                         break;
                     case R.id.nav_showfoodCC:
                         Intent intent = new Intent(MainActivity.this,FoodConditionActivity.class);

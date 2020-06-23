@@ -33,9 +33,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         //3、身材记录表
         db.execSQL("create table if not exists tb_figure(figureId integer primary key autoincrement,"+
-                "userId int,figureType String,figureData String,recordDate String)");
+                "userId int,figureType String,figureData float,recordDate String)");
 
-        //user数据
+        //user数据,id、姓名、密码、手机、性别、生日、身高、BMI、摄入的能量、消耗的能量、静态能量消耗值、活动系数、标准体重、最高心率、登录状态
         db.execSQL("insert into tb_user values (0,'cxk','123','233',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.5,63,165,0)");
         db.execSQL("insert into tb_user values (1,'dyy','123','456',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.5,63,165,0)");
         db.execSQL("insert into tb_user values (2,'xy','123','453',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.5,63,165,0)");
@@ -62,15 +62,43 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("insert into tb_goal values(9,0,45,40,'2020-06-21','2020-7-31',1,0,'cxk')");          //减肥
         db.execSQL("insert into tb_goal values(10,0,50,45,'2020-05-20','2020-5-29',2,1,'cxk')");
 
-        //身材数据
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','70.2','06-21')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','69.2','06-15')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','66.2','06-13')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','68.6','06-11')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','67.2','03-11')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','67.5','02-21')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','66.5','01-01')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','65.7','12-21')");
+        //身材 数据 weight、bust、waist、lshoulderCirc、rshoulderCirc、shoulderwidth
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',68,'2019-10-01')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',65,'2019-10-18')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',67,'2019-11-11')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',65,'2019-12-12')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',64,'2019-12-31')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',63,'2020-01-01')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',63,'2020-01-06')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',65,'2020-02-02')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',64,'2020-02-23')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',65,'2020-03-15')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',68,'2020-04-18')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',71,'2020-05-06')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',69,'2020-06-03')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',70,'2020-06-10')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',71,'2020-06-23')");
+
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',90,'2019-10-01')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',91,'2019-10-18')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2019-11-11')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',93,'2019-12-12')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2019-12-31')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-01-01')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-01-06')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',90,'2020-02-02')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',90,'2020-02-23')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',91,'2020-03-15')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',91,'2020-04-18')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',91,'2020-05-06')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-06-03')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-06-10')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-06-23')");
+
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'waist',85,'2020-03-23')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'waist',89,'2020-06-13')");
+        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'shoulderwidth',45,'2020-06-15')");
+
 
 
         /**
