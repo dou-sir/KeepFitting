@@ -90,6 +90,9 @@ public class SportAdapter extends BaseAdapter {
                 int userId = ShowSportActivity.getUserId();
                 intent.putExtra("userId",userId);
 
+                String date = ShowSportActivity.getDate();
+                intent.putExtra("date",date);
+
                 //用反射 通过图片名字获取id
                 Class drawable = R.drawable.class;
                 Field field = null;

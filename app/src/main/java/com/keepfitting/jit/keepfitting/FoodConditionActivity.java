@@ -53,8 +53,6 @@ public class FoodConditionActivity extends AppCompatActivity {
 
     private String date;
 
-    //TODO 运动的热量
-
 
 
     @Override
@@ -70,7 +68,6 @@ public class FoodConditionActivity extends AppCompatActivity {
         initComponent();
 
 
-        //TODO  获取每日能够摄取的能量 和 运动的能量
         Intent intent=getIntent();
         userId = intent.getIntExtra("userId",0);
         getAllData(userId);
@@ -311,6 +308,8 @@ public class FoodConditionActivity extends AppCompatActivity {
     public void toShowFood(View view){
         Intent intent = new Intent(this,ShowFoodActivity.class);
         intent.putExtra("userId",userId);
+        date = tv_foodCon_date.getText()+"";
+        intent.putExtra("date",date);
         startActivityForResult(intent,2);
     }
 
@@ -329,8 +328,9 @@ public class FoodConditionActivity extends AppCompatActivity {
         if (requestCode ==2){
             if (resultCode == RESULT_OK){
                 //获取今天日期 再次展示
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                date = df.format(new Date());
+//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//                date = df.format(new Date());
+                date = ShowFoodActivity.getDate();
                 tv_foodCon_date.setText(date);
                 clearListView();
                 eatenFoodList = foodService.getEatenFoodByUID(userId,date);
@@ -384,6 +384,9 @@ public class FoodConditionActivity extends AppCompatActivity {
         tv_breakfast_remind.setVisibility(View.VISIBLE);
         tv_lunch_remind.setVisibility(View.VISIBLE);
         tv_dinner_remind.setVisibility(View.VISIBLE);
+        breakfastCal =0;
+        lunchCal = 0;
+        dinnerCal = 0;
 
         refresh(needCal,totalCal,leftCal,sportCal);
     }

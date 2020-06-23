@@ -44,7 +44,7 @@ public class SportConditionActivity extends AppCompatActivity {
     private List<Map<String,Object>> sport;
     private int takenCal ;
 
-    //TODO
+
     private int sportCal =0;
     private int needCal;
     private int leftCal ;
@@ -243,7 +243,10 @@ public class SportConditionActivity extends AppCompatActivity {
     //跳转 showsport 界面 注意：只能添加当日的饮食
     public void toShowSport(View view){
         Intent intent = new Intent(this,ShowSportActivity.class);
+
+        date = tv_sportCon_date.getText()+"";
         intent.putExtra("userId",userId);
+        intent.putExtra("date",date);
         startActivityForResult(intent,2);
     }
 
@@ -261,8 +264,10 @@ public class SportConditionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2){
             if (resultCode == RESULT_OK){
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                date = df.format(new Date());
+//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//                date = df.format(new Date());
+
+                date = ShowSportActivity.getDate();
                 tv_sportCon_date.setText(date);
                 clearListView();
                 doneSportList = sportService.getDoneSportByUID(userId,date);
@@ -313,7 +318,6 @@ public class SportConditionActivity extends AppCompatActivity {
         tv_sport_remind.setVisibility(View.VISIBLE);
 
 
-        //TODO 获取当天运动热量
         refresh(needCal,takenCal,leftCal,sportCal);
 
     }

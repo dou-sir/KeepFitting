@@ -38,7 +38,7 @@ public class ShowFoodActivity extends AppCompatActivity {
 
     private static int userId;
 
-
+    private static String date;
 
 
 
@@ -57,6 +57,7 @@ public class ShowFoodActivity extends AppCompatActivity {
         //获取userId
         Intent intent = getIntent();
         userId = intent.getIntExtra("userId",0);
+        date = intent.getStringExtra("date");
 
         initComponent();
         init();
@@ -90,18 +91,18 @@ public class ShowFoodActivity extends AppCompatActivity {
 
 
         //获取今日的数据
-        //TODO 测试
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String str = df.format(new Date());
-
-        List<EatenFood> eatenFoods = foodService.getEatenFoodByUID(userId,str);
-        if (eatenFoods.size()>0) {
-            for (EatenFood eatenFood : eatenFoods) {
-                System.out.println(eatenFood);
-            }
-        }else {
-            System.out.println("没有数据");
-        }
+        // 测试
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        String str = df.format(new Date());
+//
+//        List<EatenFood> eatenFoods = foodService.getEatenFoodByUID(userId,str);
+//        if (eatenFoods.size()>0) {
+//            for (EatenFood eatenFood : eatenFoods) {
+//                System.out.println(eatenFood);
+//            }
+//        }else {
+//            System.out.println("没有数据");
+//        }
     }
 
     //回到上一个activity
@@ -233,5 +234,8 @@ public class ShowFoodActivity extends AppCompatActivity {
 
     public static int getUserId(){
         return userId;
+    }
+    public static String getDate(){
+        return date;
     }
 }

@@ -139,6 +139,7 @@ public class GoalDaoImpl implements GoalDao {
         db.close();
     }
 
+    //-----------XY-----------
     @Override
     public int getLoseWeightData(int uid) {
         int data = 0;
@@ -167,7 +168,6 @@ public class GoalDaoImpl implements GoalDao {
         return data;
     }
 
-    //-----------XY-----------
     //计算日期相隔天数
 
     public int dayBetween(String date1,String date2) throws ParseException {               //日期格式 yyyy-MM-dd

@@ -108,7 +108,9 @@ public class FoodAdapter extends BaseAdapter {
                 }
 
                 intent.putExtra("foodImg",foodImg);
-                //System.out.println("adapter:"+foodImg);
+
+                String date = ShowFoodActivity.getDate();
+                intent.putExtra("date",date);
 
                 //设置startActivityForResult 接收下个页面回传的数据
                 ((Activity)context).startActivityForResult(intent,1);
