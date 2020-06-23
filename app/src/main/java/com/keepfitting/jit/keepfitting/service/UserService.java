@@ -48,4 +48,8 @@ public interface UserService {
     //获取uid
     //public int getUid(String uname);
 
+
+    //------------------XY--------------
+    //通过uid  找到用户 得到每天需要摄入的能量
+    public int getNeedCalByUserId(int userId);
 }

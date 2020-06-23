@@ -12,8 +12,14 @@ import android.widget.TextView;
 
 import com.keepfitting.jit.keepfitting.entity.DoneSport;
 import com.keepfitting.jit.keepfitting.entity.Sport;
+import com.keepfitting.jit.keepfitting.service.FoodService;
+import com.keepfitting.jit.keepfitting.service.GoalService;
 import com.keepfitting.jit.keepfitting.service.SportService;
+import com.keepfitting.jit.keepfitting.service.UserService;
+import com.keepfitting.jit.keepfitting.service.impl.FoodServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.GoalServiceImpl;
 import com.keepfitting.jit.keepfitting.service.impl.SportServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
@@ -31,21 +37,42 @@ public class SportConditionActivity extends AppCompatActivity {
     private ListView lv_todaySport;
     private ImageView iv_toShowSport,iv_sportCon_toBack,iv_sport_dayBack,iv_sport_dayForward;
     private SportService sportService;
+    private FoodService foodService;
+    private GoalService goalService;
+    private UserService userService;
     private List<DoneSport> doneSportList;              //今天的运动列表
     private List<Map<String,Object>> sport;
-    private int totalCal=0;
-    private int sportCal = 0;
-    private int needCal = 1500;
-    private int leftCal = 1500;
+    private int takenCal ;
+
+
+    private int sportCal =0;
+    private int needCal;
+    private int leftCal ;
 
     private String date;
+
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sport_condition);
 
+        sportService = new SportServiceImpl(SportConditionActivity.this);
+        foodService = new FoodServiceImpl(SportConditionActivity.this);
+        userService = new UserServiceImpl(SportConditionActivity.this);
+        goalService = new GoalServiceImpl(SportConditionActivity.this);
+
         initComponent();
+
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("userId",0);
+        getAllData();
+
+        tv_sportCon_needCal.setText(needCal+"");
+        tv_sportCon_taken.setText(takenCal +"");
+        leftCal = needCal - takenCal +sportCal;
+
         init();
     }
 
@@ -69,13 +96,13 @@ public class SportConditionActivity extends AppCompatActivity {
     }
 
     public void init(){
-        sportService = new SportServiceImpl(SportConditionActivity.this);
+
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         date = df.format(new Date());
         tv_sportCon_date.setText(date);
 
-        doneSportList = sportService.getDoneSportByUID(1,date);
+        doneSportList = sportService.getDoneSportByUID(userId,date);
         showSport();
     }
 
@@ -99,31 +126,7 @@ public class SportConditionActivity extends AppCompatActivity {
 
             sportCal=getSportCal(clas);
 
-            //更新并设置已经运动的热量
-            tv_sportCon_taken.setText(totalCal+"");
-            leftCal = needCal - totalCal - sportCal;
-
-            //判断运动过量的情况
-            if (leftCal<0){
-                leftCal = sportCal + needCal - totalCal;
-
-                tv_sportCon_leftCal.setText(leftCal+"");
-                tv_sportCon_expend.setText(sportCal+"");
-            }else {
-                tv_sportCon_leftCal.setText(leftCal+"");
-                tv_sportCon_expend.setText(sportCal+"");
-
-
-                //判断摄入量是否超出范围
-                if ((totalCal-sportCal)>needCal){
-                    int a = (totalCal-sportCal)-needCal;
-                    tv_sportCon_middle_text.setText("多吃了！");
-                    tv_sportCon_middle_text.setTextColor(Color.RED);
-                    tv_sportCon_leftCal.setText(a+"");
-                    tv_sportCon_leftCal.setTextColor(Color.RED);
-
-                }
-            }
+            refresh(needCal,takenCal,leftCal,sportCal);
 
 
 
@@ -159,7 +162,7 @@ public class SportConditionActivity extends AppCompatActivity {
         return doneSportsCal;
     }
 
-    //通过sportsCal 计算总共摄入的热量
+    //通过sportsCal 计算总共消耗的热量
     public int getSportCal(int[] sportsCal){
         int totalSportCal = 0;
         for (int i =0;i<sportsCal.length;i++){
@@ -214,22 +217,36 @@ public class SportConditionActivity extends AppCompatActivity {
     public void dayBack(View view){
         date = getLastDay(date);
         tv_sportCon_date.setText(date);
+        takenCal = foodService.getTodayTakenCalBy(userId,date);
+        sportCal = sportService.getTodayExpandCalBy(userId,date);
+        int cal = goalService.getLoseWeightData(userId);     //获取减肥时每天需要减少摄取的能量数值
+        needCal = userService.getNeedCalByUserId(userId) - cal;     //每天需要摄入的能量
+        leftCal = needCal;
         clearListView();
-        doneSportList = sportService.getDoneSportByUID(1,date);
+        doneSportList = sportService.getDoneSportByUID(userId,date);
         showSport();
     }
     //展示后一天内容
     public void dayForward(View view){
         date = getTomorrowDay(date);
         tv_sportCon_date.setText(date);
+        takenCal = foodService.getTodayTakenCalBy(userId,date);
+        sportCal = sportService.getTodayExpandCalBy(userId,date);
+        int cal = goalService.getLoseWeightData(userId);     //获取减肥时每天需要减少摄取的能量数值
+        needCal = userService.getNeedCalByUserId(userId) - cal;     //每天需要摄入的能量
+        leftCal = needCal;
         clearListView();
-        doneSportList = sportService.getDoneSportByUID(1,date);
+        doneSportList = sportService.getDoneSportByUID(userId,date);
         showSport();
     }
 
     //跳转 showsport 界面 注意：只能添加当日的饮食
     public void toShowSport(View view){
         Intent intent = new Intent(this,ShowSportActivity.class);
+
+        date = tv_sportCon_date.getText()+"";
+        intent.putExtra("userId",userId);
+        intent.putExtra("date",date);
         startActivityForResult(intent,2);
     }
 
@@ -247,11 +264,13 @@ public class SportConditionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2){
             if (resultCode == RESULT_OK){
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                date = df.format(new Date());
+//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//                date = df.format(new Date());
+
+                date = ShowSportActivity.getDate();
                 tv_sportCon_date.setText(date);
                 clearListView();
-                doneSportList = sportService.getDoneSportByUID(1,date);
+                doneSportList = sportService.getDoneSportByUID(userId,date);
                 showSport();
             }
         }
@@ -298,19 +317,47 @@ public class SportConditionActivity extends AppCompatActivity {
         lv_todaySport.setVisibility(View.GONE);
         tv_sport_remind.setVisibility(View.VISIBLE);
 
-        tv_sportCon_middle_text.setText("还可以吃");
-        tv_sportCon_middle_text.setTextColor(Color.BLACK);
-        tv_sportCon_leftCal.setTextColor(Color.parseColor("#0097ff"));
 
-        //TODO
-        totalCal = 0;
-        sportCal = 0;
-        leftCal = 1500;
-        needCal = 1500;
+        refresh(needCal,takenCal,leftCal,sportCal);
 
-        tv_sportCon_taken.setText(totalCal+"");
-        tv_sportCon_leftCal.setText(leftCal+"");
-        tv_sportCon_needCal.setText(needCal+"");
-        tv_sportCon_expend.setText(sportCal+"");
     }
+
+    //刷新各个数据 并展示
+    public void refresh(int need,int taken,int left,int expand){
+        left = need + expand - taken;
+        if (left<0){
+            //如果摄入过多
+            tv_sportCon_middle_text.setText("多吃了！");
+            tv_sportCon_middle_text.setTextColor(Color.RED);
+            left = taken - expand -need;
+            tv_sportCon_leftCal.setText(left+"");
+            tv_sportCon_leftCal.setTextColor(Color.RED);
+            tv_sportCon_taken.setText(taken+"");
+            tv_sportCon_needCal.setText(need+"");
+            tv_sportCon_expend.setText(expand+"");
+        }else {
+            tv_sportCon_middle_text.setText("还可以吃");
+            tv_sportCon_middle_text.setTextColor(Color.BLACK);
+
+            tv_sportCon_leftCal.setText(left+"");
+            tv_sportCon_leftCal.setTextColor(Color.parseColor("#0097ff"));
+
+            tv_sportCon_taken.setText(taken+"");
+            tv_sportCon_needCal.setText(needCal+"");
+            tv_sportCon_expend.setText(expand+"");
+
+        }
+
+    }
+
+    public void getAllData(){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = df.format(new Date());
+        int cal = goalService.getLoseWeightData(userId);
+        needCal = userService.getNeedCalByUserId(userId) - cal;
+        takenCal = foodService.getTodayTakenCalBy(userId,date);
+        leftCal = needCal;
+    }
+
+
 }

@@ -134,7 +134,7 @@ public class ChartUtils extends CombinedChart{
         description.setText("kg");//需要展示的内容
         description.setTextSize(50f);
 //        description.setPosition(0,0);
-        description.setEnabled(true);
+        description.setEnabled(false);
         chart.setDescription(description);
 
         DetailsMarkerView detailsMarkerView = new DetailsMarkerView(mcontext);

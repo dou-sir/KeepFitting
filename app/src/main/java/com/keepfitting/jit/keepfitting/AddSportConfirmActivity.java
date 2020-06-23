@@ -26,6 +26,10 @@ public class AddSportConfirmActivity extends AppCompatActivity {
     private Sport sport;
     private int sport_time;
 
+    private int userId;
+
+    private String date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,9 @@ public class AddSportConfirmActivity extends AppCompatActivity {
         Intent intent = getIntent();
         sport = (Sport) intent.getSerializableExtra("sport");
         int sportImg = intent.getIntExtra("sportImg",0);
+        userId = intent.getIntExtra("userId",0);
+
+        date = intent.getStringExtra("date");
 
         iv_add_sport_img = findViewById(R.id.iv_add_sport_img);
         tv_add_sport_name = findViewById(R.id.tv_add_sport_name);
@@ -73,12 +80,14 @@ public class AddSportConfirmActivity extends AppCompatActivity {
     }
 
     public void AddSport(View view){
-        //TODO 获取User ID
 
         //获取当天日期
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String str = df.format(new Date());
-        DoneSport doneSport = new DoneSport(1,str,sport.getSportId(),sport_time);
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        String str = df.format(new Date());
+
+
+
+        DoneSport doneSport = new DoneSport(userId,date,sport.getSportId(),sport_time);
         Toast.makeText(AddSportConfirmActivity.this,doneSport.toString(), Toast.LENGTH_SHORT).show();
 
         //将需要添加的运动返回给上一个页面

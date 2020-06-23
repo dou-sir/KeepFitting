@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@mipmap/morning"
     tools:context="com.keepfitting.jit.keepfitting.KonwMeActivity">
 
 
@@ -15,15 +15,34 @@
         android:text="一分钟彻底了解自己"
         android:textSize="30sp"
         android:textStyle="bold"/>
+
+
+<LinearLayout
+    android:id="@+id/tv_bmi"
+    android:layout_below="@id/tv_knowme"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
     <TextView
-        android:id="@+id/tv_bmi"
-        android:layout_below="@id/tv_knowme"
+
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="您的身体质量指数（BMI）为："
         android:textStyle="bold"
         android:textSize="15dp"/>
 
+    <TextView
+        android:id="@+id/tv_knowme_bmi"
+        android:layout_toRightOf="@id/tv_knowme"
+        android:text="1231"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+
+
+</LinearLayout>
 
 
 
@@ -32,44 +51,91 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_bmi"
-        android:text="
-"
-
+        android:text="轻体重BMI小于18.5\n健康体重BMI在18.5至24之间\n超重BMI在24至28之间\n肥胖BMI大于28"
         />
-
+<LinearLayout
+    android:id="@+id/tv_fanwei"
+    android:layout_below="@id/tv_jieshao1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv_fanwei"
-        android:layout_below="@id/tv_jieshao1"
+
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="您的健康体重范围为："
         android:textStyle="bold"
         android:textSize="15sp"/>
+
     <TextView
+        android:id="@+id/tv_konwme_fangwei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="58.54kg-65.14kg"
+        />
+
+</LinearLayout>
+
+    <LinearLayout
         android:id="@+id/tv_tizhong"
         android:layout_below="@id/tv_fanwei"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="您的年龄身高对应标准体重为："
-        android:textStyle="bold"
-        android:textSize="15sp"/>
-    <TextView
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的年龄身高对应标准体重为："
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_konwme_tizhong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="66.5kg"/>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+
         android:id="@+id/tv_reliang"
         android:layout_below="@id/tv_tizhong"
+
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="您的每天所需的热量："
-        android:textStyle="bold"
-        android:textSize="15sp"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的每天所需的热量："
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/tv_konwme_reliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2940大卡"/>
+
+
+
+    </LinearLayout>
+
+
+
+
     <TextView
         android:id="@+id/jieshao2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_reliang"
-        android:text="         在活动强度不变情况下消耗的最低热量\n
-        当摄入小于支出时体重下降\n
-        当摄入大于支出时体重增加"
+        android:text="在活动强度不变情况下消耗的最低热量\n当摄入小于支出时体重下降\n当摄入大于支出时体重增加"
         android:textSize="13sp"/>
 
     <TextView

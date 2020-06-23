@@ -17,11 +17,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.keepfitting.jit.keepfitting.entity.EatenFood;
 import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.fragments.Figure00Fragment;
 import com.keepfitting.jit.keepfitting.fragments.Figure01Fragment;
+import com.keepfitting.jit.keepfitting.service.FoodService;
+import com.keepfitting.jit.keepfitting.service.GoalService;
+import com.keepfitting.jit.keepfitting.service.SportService;
 import com.keepfitting.jit.keepfitting.service.UserService;
+import com.keepfitting.jit.keepfitting.service.impl.FoodServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.GoalServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.SportServiceImpl;
 import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,7 +47,13 @@ public class MainActivity extends AppCompatActivity{
     private FragmentManager fragmentManager;
 
     private UserService userService;
+    private GoalService goalService;
+    private FoodService foodService;
+    private SportService sportService;
     public static User userinfo;
+
+
+
 
 
     @Override
@@ -45,6 +62,10 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         userService = new UserServiceImpl(this);
         userinfo = new User();
+
+        goalService = new GoalServiceImpl(this);
+        foodService = new FoodServiceImpl(this);
+        sportService = new SportServiceImpl(this);
 
         Intent intent =getIntent();
         if(intent.getSerializableExtra("user")!=null){
@@ -103,17 +124,21 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     case R.id.nav_showfoodCC:
                         Intent intent = new Intent(MainActivity.this,FoodConditionActivity.class);
+                        intent.putExtra("userId",userinfo.getUserID());
                         startActivity(intent);
                         break;
                     case R.id.nav_showconusumeCC:
                         Intent intent1 = new Intent(MainActivity.this,SportConditionActivity.class);
+                        intent1.putExtra("userId",userinfo.getUserID());
                         startActivity(intent1);
                         break;
                     case R.id.nav_showself:
-                        //todo
+                        Intent intent2 = new Intent(MainActivity.this,KonwMeActivity.class);
+                        startActivity(intent2);
                         break;
-                    case R.id.nav_:
-
+                    case R.id.nav_modify_user:
+                        Intent intent3 = new Intent(MainActivity.this,ModifyUserActivity.class);
+                        startActivity(intent3);
                         break;
                     default:
                 }

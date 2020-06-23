@@ -34,10 +34,12 @@ public class UserServiceImpl  implements UserService {
     @Override
     public User addUser(User user) {
         if(userDao.findUserByPhone(user.getPhone()).getNickname()!=null)
-            return new User();
+            return userDao.findUserByPhone(user.getPhone());
 
         user.setNickname(user.getPhone());
-        return userDao.addUser(user);
+        userDao.addUser(user);
+        return userDao.findUserByPhone(user.getPhone());
+
     }
 
     @Override
@@ -59,6 +61,20 @@ public class UserServiceImpl  implements UserService {
         }
         return 0;
 
+    }
+
+    @Override
+    public int getNeedCalByUserId(int userId) {
+        User user = userDao.findUserByUserID(userId);
+        float ree = user.getConsumeREE();
+        float dayRate = user.getDayrate();
+        //判断为空或者0
+        if(ree!=0&&dayRate!=0){
+            int needCal = (int) Math.round(user.getConsumeREE()*user.getDayrate());
+            return needCal;
+        }else {
+            return 2000;
+        }
     }
 
 //

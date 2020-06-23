@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.keepfitting.jit.keepfitting.AddFoodConfirmActivity;
 import com.keepfitting.jit.keepfitting.R;
+import com.keepfitting.jit.keepfitting.ShowFoodActivity;
 import com.keepfitting.jit.keepfitting.entity.Food;
 
 import java.lang.reflect.Field;
@@ -89,6 +90,10 @@ public class FoodAdapter extends BaseAdapter {
                 Food food = foodList.get(position);
                 intent.putExtra("food",food);
 
+                //从Activity中获得userId 并传递
+                int userId = ShowFoodActivity.getUserId();
+                intent.putExtra("userId",userId);
+
                 //用反射 通过图片的名字 如food0 获取图片的id
                 Class drawable = R.drawable.class;
                 Field field = null;
@@ -103,7 +108,9 @@ public class FoodAdapter extends BaseAdapter {
                 }
 
                 intent.putExtra("foodImg",foodImg);
-                //System.out.println("adapter:"+foodImg);
+
+                String date = ShowFoodActivity.getDate();
+                intent.putExtra("date",date);
 
                 //设置startActivityForResult 接收下个页面回传的数据
                 ((Activity)context).startActivityForResult(intent,1);
@@ -120,4 +127,5 @@ public class FoodAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 }

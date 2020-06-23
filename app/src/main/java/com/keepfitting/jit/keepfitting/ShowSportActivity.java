@@ -37,11 +37,23 @@ public class ShowSportActivity extends AppCompatActivity {
     //用于显示已经添加运动的个数
     private int sportNum = 0;
 
+    private static int userId;
+
+
+
+    private static String date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_sport);
+
+        Intent intent=getIntent();
+        userId = intent.getIntExtra("userId",0);
+
+
+        date = intent.getStringExtra("date");
 
         initComponent();
         init();
@@ -74,18 +86,18 @@ public class ShowSportActivity extends AppCompatActivity {
         lv_showSport.setAdapter(sportAdapter);
 
         //获取今日数据
-        //TODO 测试
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String str = df.format(new Date());
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        String str = df.format(new Date());
 
-        List<DoneSport> doneSports = sportService.getDoneSportByUID(1,str);
-        if (doneSports.size()>0) {
-            for (DoneSport doneSport : doneSports) {
-                System.out.println(doneSport);
-            }
-        }else {
-            System.out.println("没有数据");
-        }
+        //测试
+//        List<DoneSport> doneSports = sportService.getDoneSportByUID(userId,date);
+//        if (doneSports.size()>0) {
+//            for (DoneSport doneSport : doneSports) {
+//                System.out.println(doneSport);
+//            }
+//        }else {
+//            System.out.println("没有数据");
+//        }
     }
 
     //回到上一个Activity
@@ -143,6 +155,14 @@ public class ShowSportActivity extends AppCompatActivity {
             tv_show_sport_number.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    public static int getUserId() {
+        return userId;
+    }
+
+    public static String getDate(){
+        return date;
     }
 
 }

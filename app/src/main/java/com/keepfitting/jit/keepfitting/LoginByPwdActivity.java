@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.service.UserService;
@@ -47,6 +48,8 @@ public class LoginByPwdActivity extends AppCompatActivity {
             }
         });
 
+
+
         et_login_nickname=(EditText)findViewById(R.id.et_login_nickname) ;
         et_loginbypwd_password=(EditText)findViewById(R.id.et_loginbypwd_password) ;
         bt_loginbypwd_verify=findViewById(R.id.bt_loginbypwd_verify);
@@ -65,17 +68,19 @@ public class LoginByPwdActivity extends AppCompatActivity {
                     if(result!=0){
                         User checked =userService.findUserByUserID(result);
                         Intent intent = new Intent(LoginByPwdActivity.this,MainActivity.class);
+                        Toast.makeText(LoginByPwdActivity.this, "登录成功", Toast.LENGTH_LONG).show();
                         intent.putExtra("user",checked);
                         checked.setUstate(1);
                         userService.modifyUser(checked);
                         startActivity(intent);
                         LoginByPwdActivity.this.finish();
                     }else{
-                        System.out.println("用户名或密码错误" );
+                        Toast.makeText(LoginByPwdActivity.this, "用户名或密码错误", Toast.LENGTH_LONG).show();
 
                     }
                 }else{
-                  System.out.println("请输入正确的用户名或密码");//todo请输入正确的用户名或密码
+                    Toast.makeText(LoginByPwdActivity.this, "请输入正确的用户名或密码", Toast.LENGTH_LONG).show();
+                 //todo请输入正确的用户名或密码
                 }
             }
         });

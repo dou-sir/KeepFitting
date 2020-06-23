@@ -23,20 +23,20 @@
             android:title="变化趋势"/>
         <item
             android:id="@+id/nav_showfoodCC"
-            android:icon="@drawable/fitness"
-            android:title="查询食物热量"/>
+            android:icon="@drawable/menufood"
+            android:title="查询饮食"/>
         <item
             android:id="@+id/nav_showconusumeCC"
-            android:icon="@drawable/fitness"
-            android:title="查询运动消耗"/>
+            android:icon="@drawable/menusport"
+            android:title="查询运动"/>
         <item
             android:id="@+id/nav_showself"
-            android:icon="@drawable/fitness"
+            android:icon="@mipmap/ic_common_person"
             android:title="一分钟了解自己"/>
         <item
-            android:id="@+id/nav_"
-            android:icon="@drawable/fitness"
-            android:title="nav_"/>
+            android:id="@+id/nav_modify_user"
+            android:icon="@mipmap/ic_selected"
+            android:title="修改个人信息"/>
         <item
             android:id="@+id/nav"
             android:icon="@drawable/fitness"

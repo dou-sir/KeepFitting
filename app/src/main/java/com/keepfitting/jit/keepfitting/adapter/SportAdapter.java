@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.keepfitting.jit.keepfitting.AddSportConfirmActivity;
 import com.keepfitting.jit.keepfitting.R;
+import com.keepfitting.jit.keepfitting.ShowSportActivity;
 import com.keepfitting.jit.keepfitting.entity.Sport;
 
 import java.lang.reflect.Field;
@@ -85,6 +86,12 @@ public class SportAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, AddSportConfirmActivity.class);
                 Sport sport = sportList.get(position);
                 intent.putExtra("sport",sport);
+
+                int userId = ShowSportActivity.getUserId();
+                intent.putExtra("userId",userId);
+
+                String date = ShowSportActivity.getDate();
+                intent.putExtra("date",date);
 
                 //用反射 通过图片名字获取id
                 Class drawable = R.drawable.class;

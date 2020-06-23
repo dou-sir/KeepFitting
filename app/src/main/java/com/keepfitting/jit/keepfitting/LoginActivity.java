@@ -124,6 +124,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
         et_login_phonenumber = findViewById(R.id.et_login_phonenumber);
         et_login_password = findViewById(R.id.et_login_password);
         bt_login_sendmessage = findViewById(R.id.bt_login_sendmessage);
@@ -203,7 +204,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             //提交验证成功，跳转成功页面，否则toast提示
                             if (result == SMSSDK.RESULT_COMPLETE) {
                                 Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this,ModifyUserActivity.class);
+                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(LoginActivity.this, "请重试", Toast.LENGTH_SHORT).show();

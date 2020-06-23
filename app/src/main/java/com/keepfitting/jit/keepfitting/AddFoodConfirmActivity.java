@@ -27,6 +27,9 @@ public class AddFoodConfirmActivity extends AppCompatActivity {
     private int food_weight;
     private int food_style;
 
+    private int userId;
+    private String date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,9 @@ public class AddFoodConfirmActivity extends AppCompatActivity {
         Intent intent = getIntent();
         food = (Food) intent.getSerializableExtra("food");
         int foodImg = intent.getIntExtra("foodImg",0);
+        date = intent.getStringExtra("date");
+
+        userId = intent.getIntExtra("userId",0);
 
 
         iv_cancel = (ImageView) findViewById(R.id.iv_addFood_cancel);
@@ -95,18 +101,17 @@ public class AddFoodConfirmActivity extends AppCompatActivity {
 
     public void AddFood(View view){
 
-        //TODO 获取USER的ID 及 每天所需的能量
-
         //获取当前系统的时间
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String str = df.format(new Date());
-        EatenFood eatenFood = new EatenFood(1,food_style,str,food.getFoodId(),food_weight,1500);
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        String str = df.format(new Date());
+        EatenFood eatenFood = new EatenFood(userId,food_style,date,food.getFoodId(),food_weight,1500);
         Toast.makeText(AddFoodConfirmActivity.this, eatenFood.toString(), Toast.LENGTH_SHORT).show();
 
         //将需要添加的食物返回给上一个页面
         Intent intent = new Intent(this,ShowFoodActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("eatenFood",eatenFood);
+        bundle.putString("date",date);
         intent.putExtra("bundle",bundle);
         setResult(RESULT_OK,intent);
         AddFoodConfirmActivity.this.finish();

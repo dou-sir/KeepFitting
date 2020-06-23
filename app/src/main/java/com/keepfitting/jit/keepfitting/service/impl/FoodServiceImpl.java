@@ -81,4 +81,50 @@ public class FoodServiceImpl implements FoodService {
             System.out.println(e);
         }
     }
+
+    @Override
+    public int getTodayTakenCalBy(int uid, String date) {
+        List<EatenFood> eatenFoodList = foodDao.getEatenFoodByUID(uid,date);
+
+        int totalCal = 0;
+        if (eatenFoodList.size()>0){
+            for (EatenFood e:eatenFoodList){
+                int[] cals = getEatenFoodsCal(e.getFoodsID(),e.getFoodsWeight());
+                totalCal = totalCal +getTotalCal(cals);
+            }
+        }
+        return totalCal;
+    }
+
+    public int[] getEatenFoodsCal(String foodsId,String foodsWeight){
+        //将str转化为int[]数组
+        String[] ids = foodsId.split(",");
+        String[] weights = foodsWeight.split(",");
+        int[] takenFoodsId = new int[ids.length];
+        int[] takenFoodsWeight = new int[weights.length];
+        for (int i=0;i<ids.length;i++){
+            takenFoodsId[i] = Integer.parseInt(ids[i]);
+            takenFoodsWeight[i] = Integer.parseInt(weights[i]);
+        }
+
+        int[] takenFoodsCal = new int[takenFoodsId.length];
+        //遍历id列表 找到食物的cal 计算热量
+        for(int i=0;i<takenFoodsId.length;i++){
+            Food food = findFoodByFoodId(takenFoodsId[i]);
+            // 热量的计量单位是 /100g
+            double kg = (double) takenFoodsWeight[i]/100;
+            double calorie = kg * food.getFoodCalorie();
+            //四舍五入
+            takenFoodsCal[i] = (int) Math.round(calorie);
+        }
+        return takenFoodsCal;
+    }
+
+    public int getTotalCal(int[] foodsCal){
+        int totalCal = 0;
+        for (int i =0;i<foodsCal.length;i++){
+            totalCal += foodsCal[i];
+        }
+        return totalCal;
+    }
 }
