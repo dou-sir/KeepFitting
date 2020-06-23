@@ -29,7 +29,9 @@
             android:layout_height="match_parent"
             android:background="@drawable/fitness"
             android:orientation="vertical">
+
         </LinearLayout>
+
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
