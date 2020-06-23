@@ -148,10 +148,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent1);
                         break;
                     case R.id.nav_showself:
-                        //todo
+                        Intent intent2 = new Intent(MainActivity.this,KonwMeActivity.class);
+                        startActivity(intent2);
                         break;
-                    case R.id.nav_:
-
+                    case R.id.nav_modify_user:
+                        Intent intent3 = new Intent(MainActivity.this,ModifyUserActivity.class);
+                        startActivity(intent3);
                         break;
                     default:
                 }
