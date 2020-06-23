@@ -25,7 +25,7 @@ import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private ImageView iv_menu;
     private DrawerLayout dl_menu;
