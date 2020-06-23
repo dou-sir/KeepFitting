@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.keepfitting.jit.keepfitting.dao.GoalDao;
+import com.keepfitting.jit.keepfitting.entity.EatenFood;
 import com.keepfitting.jit.keepfitting.entity.Goal;
 import com.keepfitting.jit.keepfitting.util.DataBaseHelper;
 
@@ -141,7 +142,7 @@ public class GoalDaoImpl implements GoalDao {
     @Override
     public int getLoseWeightData(int uid) {
         int data = 0;
-        int days = 0;
+        int days = 1;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String sql = "select * from tb_goal where userId = ? and goalType = 1 and goalStatus = 0";
         Cursor cursor = db.rawQuery(sql,new String[]{uid+""});
@@ -159,6 +160,7 @@ public class GoalDaoImpl implements GoalDao {
             }
             int cal = (int)Math.round((startWeight - goalWeight)*7700);
             data = cal / days;
+
             return data;
         }
 

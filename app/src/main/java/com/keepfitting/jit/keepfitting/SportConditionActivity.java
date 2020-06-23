@@ -58,18 +58,21 @@ public class SportConditionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sport_condition);
 
+        sportService = new SportServiceImpl(SportConditionActivity.this);
+        foodService = new FoodServiceImpl(SportConditionActivity.this);
+        userService = new UserServiceImpl(SportConditionActivity.this);
+        goalService = new GoalServiceImpl(SportConditionActivity.this);
+
         initComponent();
 
-        //TODO 获取已经摄取食物的能量
         Intent intent = getIntent();
         userId = intent.getIntExtra("userId",0);
-        needCal = intent.getIntExtra("needCal",1500);
-        takenCal = intent.getIntExtra("takenCal",0);
-        //TODO leftCal的计算
+        getAllData();
+
         tv_sportCon_needCal.setText(needCal+"");
         tv_sportCon_taken.setText(takenCal +"");
         leftCal = needCal - takenCal +sportCal;
-        //tv_sportCon_leftCal.setText(leftCal+"");
+
         init();
     }
 
@@ -93,10 +96,7 @@ public class SportConditionActivity extends AppCompatActivity {
     }
 
     public void init(){
-        sportService = new SportServiceImpl(SportConditionActivity.this);
-        foodService = new FoodServiceImpl(SportConditionActivity.this);
-        userService = new UserServiceImpl(SportConditionActivity.this);
-        goalService = new GoalServiceImpl(SportConditionActivity.this);
+
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         date = df.format(new Date());
@@ -344,6 +344,15 @@ public class SportConditionActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    public void getAllData(){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = df.format(new Date());
+        int cal = goalService.getLoseWeightData(userId);
+        needCal = userService.getNeedCalByUserId(userId) - cal;
+        takenCal = foodService.getTodayTakenCalBy(userId,date);
+        leftCal = needCal;
     }
 
 

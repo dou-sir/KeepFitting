@@ -100,15 +100,6 @@ public class MainActivity extends AppCompatActivity {
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int cal = goalService.getLoseWeightData(userinfo.getUserID());     //获取减肥时每天需要减少摄取的能量数值
-                int needCal = userService.getNeedCalByUserId(userinfo.getUserID());     //每天需要摄入的能量
-                needCal = needCal - cal;
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String date = sdf.format(new Date());
-
-
                 switch (item.getItemId()){
                     case R.id.nav_home:
                         //todo 切换fragment
@@ -132,19 +123,13 @@ public class MainActivity extends AppCompatActivity {
                         fmTransaction(figure01Fragment);
                         break;
                     case R.id.nav_showfoodCC:
-                        int sportCal = sportService.getTodayExpandCalBy(userinfo.getUserID(),date);
                         Intent intent = new Intent(MainActivity.this,FoodConditionActivity.class);
-                        intent.putExtra("needCal",needCal);
-                        intent.putExtra("sportCal",sportCal);
                         intent.putExtra("userId",userinfo.getUserID());
                         startActivity(intent);
                         break;
                     case R.id.nav_showconusumeCC:
-                        int takenCal = foodService.getTodayTakenCalBy(userinfo.getUserID(),date);
                         Intent intent1 = new Intent(MainActivity.this,SportConditionActivity.class);
-                        intent1.putExtra("needCal",needCal);
                         intent1.putExtra("userId",userinfo.getUserID());
-                        intent1.putExtra("takenCal",takenCal);
                         startActivity(intent1);
                         break;
                     case R.id.nav_showself:

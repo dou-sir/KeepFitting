@@ -55,11 +55,17 @@ public class FoodConditionActivity extends AppCompatActivity {
 
     //TODO 运动的热量
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_condition);
 
+        foodService = new FoodServiceImpl(FoodConditionActivity.this);
+        sportService = new SportServiceImpl(FoodConditionActivity.this);
+        userService = new UserServiceImpl(FoodConditionActivity.this);
+        goalService = new GoalServiceImpl(FoodConditionActivity.this);
 
         initComponent();
 
@@ -67,9 +73,7 @@ public class FoodConditionActivity extends AppCompatActivity {
         //TODO  获取每日能够摄取的能量 和 运动的能量
         Intent intent=getIntent();
         userId = intent.getIntExtra("userId",0);
-        needCal = intent.getIntExtra("needCal",1500);
-        sportCal = intent.getIntExtra("sportCal",0);
-        leftCal = needCal;
+        getAllData(userId);
         tv_foodCon_needCal.setText(needCal+"");
 
         init();
@@ -99,10 +103,7 @@ public class FoodConditionActivity extends AppCompatActivity {
     }
 
     public void init(){
-        foodService = new FoodServiceImpl(FoodConditionActivity.this);
-        sportService = new SportServiceImpl(FoodConditionActivity.this);
-        userService = new UserServiceImpl(FoodConditionActivity.this);
-        goalService = new GoalServiceImpl(FoodConditionActivity.this);
+
 
         //获取今日日期 修改格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -412,6 +413,17 @@ public class FoodConditionActivity extends AppCompatActivity {
             tv_foodCon_expend.setText(expand+"");
 
         }
+
+    }
+
+    //获取所有数据
+    public void getAllData(int uid){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = df.format(new Date());
+        int cal = goalService.getLoseWeightData(uid);
+        needCal = userService.getNeedCalByUserId(uid) - cal;
+        sportCal = sportService.getTodayExpandCalBy(uid,date);
+        leftCal = needCal;
 
     }
 }

@@ -66,8 +66,15 @@ public class UserServiceImpl  implements UserService {
     @Override
     public int getNeedCalByUserId(int userId) {
         User user = userDao.findUserByUserID(userId);
-        int needCal = (int) Math.round(user.getConsumeREE()*user.getDayrate());
-        return needCal;
+        float ree = user.getConsumeREE();
+        float dayRate = user.getDayrate();
+        //判断为空或者0
+        if(ree!=0&&dayRate!=0){
+            int needCal = (int) Math.round(user.getConsumeREE()*user.getDayrate());
+            return needCal;
+        }else {
+            return 2000;
+        }
     }
 
 //
