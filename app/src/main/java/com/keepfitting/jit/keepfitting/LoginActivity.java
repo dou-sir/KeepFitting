@@ -24,7 +24,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.service.UserService;
+import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 import com.mob.tools.FakeActivity;
 import com.mob.tools.utils.ResHelper;
 import com.mob.tools.utils.SharePrefrenceHelper;
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        userService=new UserServiceImpl(this);
         initView();
 
 
@@ -129,6 +132,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         et_login_password = findViewById(R.id.et_login_password);
         bt_login_sendmessage = findViewById(R.id.bt_login_sendmessage);
         bt_login_verify=findViewById(R.id.bt_login_verify);
+
     }
 
 
@@ -203,9 +207,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void run() {
                             //提交验证成功，跳转成功页面，否则toast提示
                             if (result == SMSSDK.RESULT_COMPLETE) {
-                                Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                startActivity(intent);
+                                User toadd = new User();
+                                toadd.setPhone(phoneNumber);
+                      //          System.out.println("aaa"+phoneNumber+toadd.toString());
+                                 toadd = userService.addUser(toadd);
+
+                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                 intent.putExtra("user",toadd);
+                                 toadd.setUstate(1);
+                                 userService.modifyUser(toadd);
+
+                                 startActivity(intent);
+                                LoginActivity.this.finish();
+
+
+
                             } else {
                                 Toast.makeText(LoginActivity.this, "请重试", Toast.LENGTH_SHORT).show();
                             }
