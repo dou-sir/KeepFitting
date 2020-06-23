@@ -116,7 +116,8 @@ public class FragmentGoal extends Fragment implements GoalAdapter.CompleteListen
                 int goalId=(Integer)goalList.get(position).getGoalId();
                 intent.putExtra("goalId",goalId);
                 startActivity(intent);
-                getActivity().finish();
+                //startActivityForResult(intent,1);
+                //getActivity().finish();
             }
         });
 
