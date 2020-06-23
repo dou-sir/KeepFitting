@@ -23,12 +23,12 @@
             android:title="变化趋势"/>
         <item
             android:id="@+id/nav_showfoodCC"
-            android:icon="@drawable/fitness"
-            android:title="查询食物热量"/>
+            android:icon="@drawable/menufood"
+            android:title="查询饮食"/>
         <item
             android:id="@+id/nav_showconusumeCC"
-            android:icon="@drawable/fitness"
-            android:title="查询运动消耗"/>
+            android:icon="@drawable/menusport"
+            android:title="查询运动"/>
         <item
             android:id="@+id/nav_showself"
             android:icon="@drawable/fitness"

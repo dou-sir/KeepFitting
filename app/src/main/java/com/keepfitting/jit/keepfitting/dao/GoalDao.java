@@ -25,5 +25,8 @@ public interface GoalDao {
     //由goalId改变是否完成
     public void ChangeStatus(int goalId);
 
+    //--------XY----------
+    //通过uid搜索减肥的计划  求得需要每天需要减少的那一部分热量
+    public int getLoseWeightData(int uid);
 
 }

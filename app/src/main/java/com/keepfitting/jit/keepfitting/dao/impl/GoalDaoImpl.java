@@ -8,7 +8,11 @@ import com.keepfitting.jit.keepfitting.dao.GoalDao;
 import com.keepfitting.jit.keepfitting.entity.Goal;
 import com.keepfitting.jit.keepfitting.util.DataBaseHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -134,5 +138,48 @@ public class GoalDaoImpl implements GoalDao {
         db.close();
     }
 
+    @Override
+    public int getLoseWeightData(int uid) {
+        int data = 0;
+        int days = 0;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "select * from tb_goal where userId = ? and goalType = 1 and goalStatus = 0";
+        Cursor cursor = db.rawQuery(sql,new String[]{uid+""});
+        while (cursor.moveToNext()){                                                    //若没有数值 不会执行
+            float startWeight = cursor.getFloat(cursor.getColumnIndex("startData"));
+            float goalWeight = cursor.getFloat(cursor.getColumnIndex("goalData"));
+            //1kg 是 7700 千卡
+            String startDate = cursor.getString(cursor.getColumnIndex("startTime"));
+            String endDate = cursor.getString(cursor.getColumnIndex("endTime"));
+            //计算两个日期之间的天数
+            try {
+                days = dayBetween(startDate,endDate);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            int cal = (int)Math.round((startWeight - goalWeight)*7700);
+            data = cal / days;
+            return data;
+        }
+
+        return data;
+    }
+
+    //-----------XY-----------
+    //计算日期相隔天数
+
+    public int dayBetween(String date1,String date2) throws ParseException {               //日期格式 yyyy-MM-dd
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = sdf.parse(date1);
+        Date end = sdf.parse(date2);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(start);
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(end);
+        long time2 = cal.getTimeInMillis();
+        long between_days=(time2-time1)/(1000*3600*24);
+        return Integer.parseInt(String.valueOf(between_days));
+    }
 
 }

@@ -37,11 +37,18 @@ public class ShowSportActivity extends AppCompatActivity {
     //用于显示已经添加运动的个数
     private int sportNum = 0;
 
+    private static int userId;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_sport);
+
+        Intent intent=getIntent();
+        userId = intent.getIntExtra("userId",0);
 
         initComponent();
         init();
@@ -78,7 +85,7 @@ public class ShowSportActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String str = df.format(new Date());
 
-        List<DoneSport> doneSports = sportService.getDoneSportByUID(1,str);
+        List<DoneSport> doneSports = sportService.getDoneSportByUID(userId,str);
         if (doneSports.size()>0) {
             for (DoneSport doneSport : doneSports) {
                 System.out.println(doneSport);
@@ -143,6 +150,10 @@ public class ShowSportActivity extends AppCompatActivity {
             tv_show_sport_number.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    public static int getUserId() {
+        return userId;
     }
 
 }

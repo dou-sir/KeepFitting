@@ -82,4 +82,9 @@ public class GoalServiceImpl implements GoalService {
             System.out.println(e);
         }
     }
+
+    @Override
+    public int getLoseWeightData(int uid) {
+        return goalDao.getLoseWeightData(uid);
+    }
 }

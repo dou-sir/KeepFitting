@@ -75,4 +75,50 @@ public class SportServiceImpl implements SportService {
         }
     }
 
+    @Override
+    public int getTodayExpandCalBy(int uid, String date) {
+        List<DoneSport> doneSportList = sportDao.getDoneSportByUID(uid, date);
+        int totalCal = 0;
+        if (doneSportList.size()>0){
+            DoneSport doneSport = doneSportList.get(0);
+            int[] cals = getDoneSportsCal(doneSport.getSportsId(),doneSport.getSportsTime());
+            totalCal = getSportCal(cals);
+        }
+        return totalCal;
+    }
+
+
+    //通过传入sportsId 和 sportsTime 来计算消耗的热量数组
+    public int[] getDoneSportsCal(String sportsId,String sportsTime){
+        //将str转化为数组
+        String[] ids = sportsId.split(",");
+        String[] times = sportsTime.split(",");
+
+        int[] doneSportsId = new int[ids.length];
+        int[] doneSportsTime = new int[times.length];
+        for (int i =0;i<ids.length;i++){
+            doneSportsId[i] = Integer.parseInt(ids[i]);
+            doneSportsTime[i] = Integer.parseInt(times[i]);
+        }
+
+        int[] doneSportsCal = new int[doneSportsId.length];
+        //遍历id列表 找到运动的cal 计算热量
+        for (int i = 0;i<doneSportsId.length;i++){
+            Sport sport = findSportBySportId(doneSportsId[i]);
+            // 热量的计量单位是 /60min
+            double hour = (double) doneSportsTime[i]/60;
+            double calorie = hour * sport.getSportCalorie();
+            doneSportsCal[i] = (int) Math.round(calorie);
+        }
+        return doneSportsCal;
+    }
+
+    //通过sportsCal 计算总共消耗的热量
+    public int getSportCal(int[] sportsCal){
+        int totalSportCal = 0;
+        for (int i =0;i<sportsCal.length;i++){
+            totalSportCal += sportsCal[i];
+        }
+        return  totalSportCal;
+    }
 }

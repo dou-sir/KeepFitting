@@ -47,4 +47,9 @@ public interface SportService {
      * @param doneSport
      */
     public void ChangeDoneSport(DoneSport doneSport);
+
+    /**
+     *显示某天 总共消耗的能量      food模块中用到
+     */
+    public int getTodayExpandCalBy(int uid,String date);
 }

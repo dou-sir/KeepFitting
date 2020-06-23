@@ -33,73 +33,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         //3、身材记录表
         db.execSQL("create table if not exists tb_figure(figureId integer primary key autoincrement,"+
-                "userId int,figureType String,figureData float,recordDate String)");
+                "userId int,figureType String,figureData String,recordDate String)");
 
-
-
-        //user数据,id、姓名、密码、手机、性别、生日、身高、BMI、摄入的能量、消耗的能量、静态能量消耗值、活动系数、标准体重、最高心率、登录状态
-        db.execSQL("insert into tb_user values (0,'cxk','123','233',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
-        db.execSQL("insert into tb_user values (1,'dyy','123','456',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
-        db.execSQL("insert into tb_user values (2,'xy','123','453',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
-        db.execSQL("insert into tb_user values (3,'cwn','123','4512',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
-        db.execSQL("insert into tb_user values (4,'gzh','123','2545',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.2,63,165,0)");
+        //user数据
+        db.execSQL("insert into tb_user values (0,'cxk','123','233',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.5,63,165,0)");
+        db.execSQL("insert into tb_user values (1,'dyy','123','456',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.5,63,165,0)");
+        db.execSQL("insert into tb_user values (2,'xy','123','453',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.5,63,165,0)");
+        db.execSQL("insert into tb_user values (3,'cwn','123','4512',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.5,63,165,0)");
+        db.execSQL("insert into tb_user values (4,'gzh','123','2545',1,'1999-09-09','170',22.5,2000,1800,1607.5,1.5,63,165,0)");
 //        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (1,'dyy','123','123')");
 //        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (2,'xy','123','321')");
 //        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (3,'cwn','123','121')");
 //        db.execSQL("insert into tb_user (userId,nickname,authtoken,phone) values (4,'gzh','123','131')");
-        //身材 数据 weight、bust、waist、lshoulderCirc、rshoulderCirc、shoulderwidth
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',68,'2019-10-01')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',65,'2019-10-18')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',67,'2019-11-11')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',65,'2019-12-12')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',64,'2019-12-31')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',63,'2020-01-01')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',63,'2020-01-06')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',65,'2020-02-02')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',64,'2020-02-23')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',65,'2020-03-15')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',68,'2020-04-18')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',71,'2020-05-06')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',69,'2020-06-03')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',70,'2020-06-10')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'weight',71,'2020-06-23')");
 
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',90,'2019-10-01')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',91,'2019-10-18')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2019-11-11')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',93,'2019-12-12')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2019-12-31')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-01-01')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-01-06')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',90,'2020-02-02')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',90,'2020-02-23')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',91,'2020-03-15')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',91,'2020-04-18')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',91,'2020-05-06')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-06-03')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-06-10')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'bust',92,'2020-06-23')");
-
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'waist',85,'2020-03-23')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'waist',89,'2020-06-13')");
-        db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values (1,'shoulderwidth',45,'2020-06-15')");
         //计划
 
         db.execSQL("insert into tb_goal values(0,1,45,40,'2020.6.21','6.25',1,1,'无')");
-        db.execSQL("insert into tb_goal values(1,1,50,45,'5.20','5.29',1,0,'无')");
-        db.execSQL("insert into tb_goal values(2,1,80,70,'6.1','7.30',1,1,'无')");
+        db.execSQL("insert into tb_goal values(1,1,50,45,'2020-05-20','2020-06-30',1,0,'无')");      //减肥
+        db.execSQL("insert into tb_goal values(2,1,80,70,'2020-06-01','7.30',1,1,'无')");
 
         db.execSQL("insert into tb_goal values(3,2,45,40,'2020.6.21','6.25',2,0,'1112')");
         db.execSQL("insert into tb_goal values(4,2,50,45,'5.20','5.29',2,1,'2223')");
         db.execSQL("insert into tb_goal values(5,2,80,70,'6.1','7.30',2,0,'3334')");
 
-        db.execSQL("insert into tb_goal values(6,3,45,40,'2020.6.21','6.25',1,0,'111')");
+        db.execSQL("insert into tb_goal values(6,3,45,40,'2020-06-21','2020-07-30',1,0,'111')");         //减肥
         db.execSQL("insert into tb_goal values(7,3,50,45,'2020.5.20','5.29',2,1,'222')");
-        db.execSQL("insert into tb_goal values(8,3,80,70,'2021.6.1','7.30',1,0,'333')");
 
-        db.execSQL("insert into tb_goal values(9,0,45,40,'2020-6-21','2020-6-25',1,0,'cxk')");
-        db.execSQL("insert into tb_goal values(10,0,50,45,'2020-5-20','2020-5-29',2,1,'cxk')");
-        db.execSQL("insert into tb_goal values(11,0,80,70,'2021-6-1','2020-7-30',1,0,'cxk')");
+        db.execSQL("insert into tb_goal values(9,0,45,40,'2020-06-21','2020-7-31',1,0,'cxk')");          //减肥
+        db.execSQL("insert into tb_goal values(10,0,50,45,'2020-05-20','2020-5-29',2,1,'cxk')");
 
         //身材数据
         db.execSQL("insert into tb_figure (userId,figureType,figureData,recordDate) values(0,'体重','70.2','06-21')");
@@ -186,20 +147,84 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("insert into tb_sport values(12,'乒乓球',267,12)");
 
         //添加饮食数据
-        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-16','0,1,2','188,82,120',1500)");
-        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-16','15,12,20','18,80,100',1500)");
-        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-16','10,13,24','50,85,120',1500)");
 
-        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-19','0,1,2','188,82,120',1500)");
-        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-19','15,12,20','18,80,100',1500)");
-        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-19','10,13,24','50,85,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-17','0,1,2','288,82,320',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-17','5,12,20','208,80,200',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-17','10,13,24','350,285,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-18','0,1,2','188,82,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-18','6,8,20','308,180,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-18','11,13,24','350,205,220',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-19','0,1,2','188,282,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-19','9,4,21','118,380,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-19','14,15,18','150,285,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-20','3,14,21','188,82,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-20','15,19,7','150,380,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-20','16,4,12','150,485,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-21','0,15,2','188,82,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-21','3,13,23','518,100,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-21','10,13,17','150,285,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-22','6,16,2','188,482,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-22','14,19,20','180,680,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-22','1,3,4','250,185,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(1,1,'2020-06-23','0,1,2','488,182,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,2,'2020-06-23','5,14,22','180,480,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(1,3,'2020-06-23','14,6,7','350,185,320',1500)");
+
+
+
+
+        db.execSQL("insert into tb_dailyfood values(2,1,'2020-06-17','0,1,2','288,82,320',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,2,'2020-06-17','5,12,20','208,80,200',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,3,'2020-06-17','10,13,24','350,285,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(2,1,'2020-06-18','0,1,2','188,82,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,2,'2020-06-18','6,8,20','308,180,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,3,'2020-06-18','11,13,24','350,205,220',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(2,1,'2020-06-19','0,1,2','188,282,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,2,'2020-06-19','9,4,21','118,380,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,3,'2020-06-19','14,15,18','150,285,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(2,1,'2020-06-20','3,14,21','188,82,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,2,'2020-06-20','15,19,7','150,380,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,3,'2020-06-20','16,4,12','150,485,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(2,1,'2020-06-21','0,15,2','188,82,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,2,'2020-06-21','3,13,23','518,100,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,3,'2020-06-21','10,13,17','150,285,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(2,1,'2020-06-22','6,16,2','188,482,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,2,'2020-06-22','14,19,20','180,680,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,3,'2020-06-22','1,3,4','250,185,120',1500)");
+
+        db.execSQL("insert into tb_dailyfood values(2,1,'2020-06-23','0,1,2','488,182,120',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,2,'2020-06-23','5,14,22','180,480,100',1500)");
+        db.execSQL("insert into tb_dailyfood values(2,3,'2020-06-23','14,6,7','350,185,320',1500)");
+
+
 
         //添加运动数据
-        db.execSQL("insert into tb_dailysport values(1,'2020-06-16','0,1,2','60,60,60')");
-
+        db.execSQL("insert into tb_dailysport values(1,'2020-06-17','0,1,2','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(1,'2020-06-18','10,11,2','60,60,60')");
         db.execSQL("insert into tb_dailysport values(1,'2020-06-19','5,6,7','45,30,60')");
+        db.execSQL("insert into tb_dailysport values(1,'2020-06-20','7,12,4','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(1,'2020-06-21','6,9,2','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(1,'2020-06-22','5,7,12','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(1,'2020-06-23','10,11,12','60,60,60')");
 
-
+        db.execSQL("insert into tb_dailysport values(2,'2020-06-17','0,1,2','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(2,'2020-06-18','10,11,2','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(2,'2020-06-19','5,6,7','45,30,60')");
+        db.execSQL("insert into tb_dailysport values(2,'2020-06-20','7,12,4','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(2,'2020-06-21','6,9,2','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(2,'2020-06-22','5,7,12','60,60,60')");
+        db.execSQL("insert into tb_dailysport values(2,'2020-06-23','10,11,12','60,60,60')");
 
     }
 

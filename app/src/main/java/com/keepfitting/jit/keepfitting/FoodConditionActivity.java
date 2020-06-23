@@ -14,7 +14,13 @@ import android.widget.TextView;
 import com.keepfitting.jit.keepfitting.entity.EatenFood;
 import com.keepfitting.jit.keepfitting.entity.Food;
 import com.keepfitting.jit.keepfitting.service.FoodService;
+import com.keepfitting.jit.keepfitting.service.GoalService;
+import com.keepfitting.jit.keepfitting.service.SportService;
+import com.keepfitting.jit.keepfitting.service.UserService;
 import com.keepfitting.jit.keepfitting.service.impl.FoodServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.GoalServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.SportServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -32,27 +38,40 @@ public class FoodConditionActivity extends AppCompatActivity {
     private ListView lv_breakfast,lv_lunch,lv_dinner;
     private ImageView iv_toShowFood,iv_foodCon_toBack,iv_dayBack,iv_dayForward;
     private FoodService foodService;
+    private UserService userService;
+    private SportService sportService;
+    private GoalService goalService;
     private List<EatenFood> eatenFoodList;              //今天吃的食物列表
     private List<Map<String,Object>> breakfast,lunch,dinner;
     private int breakfastCal=0,lunchCal=0,dinnerCal=0,totalCal=0;
-    private int sportCal = 0;
-    private int needCal = 1500;
-    private int leftCal = 1500;
+    private int sportCal ;
+    private static int needCal ;
+    private int leftCal ;
 
+    private static int userId;
 
 
     private String date;
 
-    //TODO 获取UserID 和 每天所需要的能量 和 运动的热量
-    //TODO 日期的修改
-
+    //TODO 运动的热量
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_condition);
 
+
         initComponent();
+
+
+        //TODO  获取每日能够摄取的能量 和 运动的能量
+        Intent intent=getIntent();
+        userId = intent.getIntExtra("userId",0);
+        needCal = intent.getIntExtra("needCal",1500);
+        sportCal = intent.getIntExtra("sportCal",0);
+        leftCal = needCal;
+        tv_foodCon_needCal.setText(needCal+"");
+
         init();
     }
 
@@ -81,13 +100,15 @@ public class FoodConditionActivity extends AppCompatActivity {
 
     public void init(){
         foodService = new FoodServiceImpl(FoodConditionActivity.this);
+        sportService = new SportServiceImpl(FoodConditionActivity.this);
+        userService = new UserServiceImpl(FoodConditionActivity.this);
+        goalService = new GoalServiceImpl(FoodConditionActivity.this);
 
         //获取今日日期 修改格式
-        //TODO uid
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         date = df.format(new Date());
         tv_foodCon_date.setText(date);
-        eatenFoodList = foodService.getEatenFoodByUID(1,date);
+        eatenFoodList = foodService.getEatenFoodByUID(userId,date);
         showFood();
     }
 
@@ -156,19 +177,21 @@ public class FoodConditionActivity extends AppCompatActivity {
 
             //更新并设置已经摄取的热量
             totalCal = breakfastCal + lunchCal + dinnerCal;
-            tv_foodCon_taken.setText(totalCal+"");
-            //更新还能摄入的热量
-            leftCal = needCal - totalCal - sportCal;
-            tv_foodCon_leftCal.setText(leftCal+"");
+            refresh(needCal,totalCal,leftCal,sportCal);
+//            tv_foodCon_taken.setText(totalCal+"");
+//            //更新还能摄入的热量
+//            leftCal = needCal - totalCal - sportCal;
+//            tv_foodCon_leftCal.setText(leftCal+"");
+//
+//            //判断摄入量是否超出范围
+//            if((totalCal - sportCal)>needCal){
+//                int a = (totalCal-sportCal)-needCal;
+//                tv_foodCon_middle_text.setText("多吃了！");
+//                tv_foodCon_middle_text.setTextColor(Color.RED);
+//                tv_foodCon_leftCal.setText(a+"");
+//                tv_foodCon_leftCal.setTextColor(Color.RED);
+//            }
 
-            //判断摄入量是否超出范围
-            if((totalCal - sportCal)>needCal){
-                int a = (totalCal-sportCal)-needCal;
-                tv_foodCon_middle_text.setText("多吃了！");
-                tv_foodCon_middle_text.setTextColor(Color.RED);
-                tv_foodCon_leftCal.setText(a+"");
-                tv_foodCon_leftCal.setTextColor(Color.RED);
-            }
 
         }else {
             clearListView();
@@ -258,8 +281,13 @@ public class FoodConditionActivity extends AppCompatActivity {
     public void dayBack(View view){
         date = getLastDay(date);
         tv_foodCon_date.setText(date);
+        totalCal = foodService.getTodayTakenCalBy(userId,date);
+        sportCal = sportService.getTodayExpandCalBy(userId,date);
+        int cal = goalService.getLoseWeightData(userId);
+        needCal = userService.getNeedCalByUserId(userId)-cal;
+        leftCal = needCal;
         clearListView();
-        eatenFoodList = foodService.getEatenFoodByUID(1,date);
+        eatenFoodList = foodService.getEatenFoodByUID(userId,date);
         showFood();
 
     }
@@ -268,14 +296,20 @@ public class FoodConditionActivity extends AppCompatActivity {
     public void dayForward(View view){
         date = getTomorrowDay(date);
         tv_foodCon_date.setText(date);
+        totalCal = foodService.getTodayTakenCalBy(userId,date);
+        sportCal = sportService.getTodayExpandCalBy(userId,date);
+        int cal = goalService.getLoseWeightData(userId);
+        needCal = userService.getNeedCalByUserId(userId)-cal;
+        leftCal = needCal;
         clearListView();
-        eatenFoodList = foodService.getEatenFoodByUID(1,date);
+        eatenFoodList = foodService.getEatenFoodByUID(userId,date);
         showFood();
     }
 
     //跳转 showfood 界面 注意：只能添加当日的饮食
     public void toShowFood(View view){
         Intent intent = new Intent(this,ShowFoodActivity.class);
+        intent.putExtra("userId",userId);
         startActivityForResult(intent,2);
     }
 
@@ -298,7 +332,7 @@ public class FoodConditionActivity extends AppCompatActivity {
                 date = df.format(new Date());
                 tv_foodCon_date.setText(date);
                 clearListView();
-                eatenFoodList = foodService.getEatenFoodByUID(1,date);
+                eatenFoodList = foodService.getEatenFoodByUID(userId,date);
                 showFood();
             }
         }
@@ -350,23 +384,34 @@ public class FoodConditionActivity extends AppCompatActivity {
         tv_lunch_remind.setVisibility(View.VISIBLE);
         tv_dinner_remind.setVisibility(View.VISIBLE);
 
+        refresh(needCal,totalCal,leftCal,sportCal);
+    }
 
-        tv_foodCon_middle_text.setText("还可以吃");
-        tv_foodCon_middle_text.setTextColor(Color.BLACK);
-        tv_foodCon_leftCal.setTextColor(Color.parseColor("#0097ff"));
+    //刷新各个数据 并展示
+    public void refresh(int need,int taken,int left,int expand){
+        left = need + expand - taken;
+        if (left<0){
+            //如果摄入过多
+            tv_foodCon_middle_text.setText("多吃了！");
+            tv_foodCon_middle_text.setTextColor(Color.RED);
+            left = taken - expand -need;
+            tv_foodCon_leftCal.setText(left+"");
+            tv_foodCon_leftCal.setTextColor(Color.RED);
+            tv_foodCon_taken.setText(taken+"");
+            tv_foodCon_needCal.setText(need+"");
+            tv_foodCon_expend.setText(expand+"");
+        }else {
+            tv_foodCon_middle_text.setText("还可以吃");
+            tv_foodCon_middle_text.setTextColor(Color.BLACK);
 
-        breakfastCal = 0;
-        dinnerCal = 0;
-        lunchCal = 0;
-        totalCal = 0;
-        leftCal = 1500;
-        sportCal = 0;
-        needCal = 1500;
+            tv_foodCon_leftCal.setText(left+"");
+            tv_foodCon_leftCal.setTextColor(Color.parseColor("#0097ff"));
 
-        //TODO 需要获取个人的每日所需能量
-        tv_foodCon_taken.setText(totalCal+"");
-        tv_foodCon_leftCal.setText(leftCal+"");
-        tv_foodCon_needCal.setText(needCal+"");
-        tv_foodCon_expend.setText(sportCal+"");
+            tv_foodCon_taken.setText(taken+"");
+            tv_foodCon_needCal.setText(needCal+"");
+            tv_foodCon_expend.setText(expand+"");
+
+        }
+
     }
 }

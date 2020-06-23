@@ -17,11 +17,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.keepfitting.jit.keepfitting.entity.EatenFood;
 import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.fragments.Figure00Fragment;
 import com.keepfitting.jit.keepfitting.fragments.Figure01Fragment;
+import com.keepfitting.jit.keepfitting.service.FoodService;
+import com.keepfitting.jit.keepfitting.service.GoalService;
+import com.keepfitting.jit.keepfitting.service.SportService;
 import com.keepfitting.jit.keepfitting.service.UserService;
+import com.keepfitting.jit.keepfitting.service.impl.FoodServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.GoalServiceImpl;
+import com.keepfitting.jit.keepfitting.service.impl.SportServiceImpl;
 import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,7 +47,13 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
 
     private UserService userService;
+    private GoalService goalService;
+    private FoodService foodService;
+    private SportService sportService;
     public static User userinfo;
+
+
+
 
 
     @Override
@@ -45,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         userService = new UserServiceImpl(this);
         userinfo = new User();
+
+        goalService = new GoalServiceImpl(this);
+        foodService = new FoodServiceImpl(this);
+        sportService = new SportServiceImpl(this);
 
         Intent intent =getIntent();
         if(intent.getSerializableExtra("user")!=null){
@@ -79,9 +100,15 @@ public class MainActivity extends AppCompatActivity {
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Bundle bundle = new Bundle();
-                Intent intent = new Intent();
-                //可用bundle或intent传值
+
+                int cal = goalService.getLoseWeightData(userinfo.getUserID());     //获取减肥时每天需要减少摄取的能量数值
+                int needCal = userService.getNeedCalByUserId(userinfo.getUserID());     //每天需要摄入的能量
+                needCal = needCal - cal;
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String date = sdf.format(new Date());
+
+
                 switch (item.getItemId()){
                     case R.id.nav_home:
                         //todo 切换fragment
@@ -97,22 +124,28 @@ public class MainActivity extends AppCompatActivity {
                         fmTransaction(fragmentAddGoal);
                         break;
                     case R.id.nav_newfigure:
-                        ShowFigureFragment newFigureFragment = new ShowFigureFragment();
-                        fmTransaction(newFigureFragment);
-                        break;
-                    case R.id.nav_showfigure:
                         ShowFigureFragment showFigureFragment = new ShowFigureFragment();
-                        bundle.putString("flag","show");
-                        showFigureFragment.setArguments(bundle);
                         fmTransaction(showFigureFragment);
                         break;
+                    case R.id.nav_showfigure:
+                        Figure01Fragment figure01Fragment = new Figure01Fragment();
+                        fmTransaction(figure01Fragment);
+                        break;
                     case R.id.nav_showfoodCC:
-                        intent = new Intent(MainActivity.this,FoodConditionActivity.class);
+                        int sportCal = sportService.getTodayExpandCalBy(userinfo.getUserID(),date);
+                        Intent intent = new Intent(MainActivity.this,FoodConditionActivity.class);
+                        intent.putExtra("needCal",needCal);
+                        intent.putExtra("sportCal",sportCal);
+                        intent.putExtra("userId",userinfo.getUserID());
                         startActivity(intent);
                         break;
                     case R.id.nav_showconusumeCC:
-                        intent = new Intent(MainActivity.this,SportConditionActivity.class);
-                        startActivity(intent);
+                        int takenCal = foodService.getTodayTakenCalBy(userinfo.getUserID(),date);
+                        Intent intent1 = new Intent(MainActivity.this,SportConditionActivity.class);
+                        intent1.putExtra("needCal",needCal);
+                        intent1.putExtra("userId",userinfo.getUserID());
+                        intent1.putExtra("takenCal",takenCal);
+                        startActivity(intent1);
                         break;
                     case R.id.nav_showself:
                         //todo

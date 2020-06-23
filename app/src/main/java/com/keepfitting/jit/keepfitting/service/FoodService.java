@@ -51,4 +51,8 @@ public interface FoodService {
      */
     public void ChangeEatenFood(EatenFood eatenFood);
 
+    /**
+     *显示某天 总共摄取的能量      sport模块中用到
+     */
+    public int getTodayTakenCalBy(int uid,String date);
 }

@@ -36,6 +36,11 @@ public class ShowFoodActivity extends AppCompatActivity {
     private int lunchNum = 0;
     private int dinnerNum = 0;
 
+    private static int userId;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,10 @@ public class ShowFoodActivity extends AppCompatActivity {
 
         //需要添加到数据库的list 初始化
         eatenFoodList = new ArrayList<>();
+
+        //获取userId
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("userId",0);
 
         initComponent();
         init();
@@ -85,7 +94,7 @@ public class ShowFoodActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String str = df.format(new Date());
 
-        List<EatenFood> eatenFoods = foodService.getEatenFoodByUID(1,str);
+        List<EatenFood> eatenFoods = foodService.getEatenFoodByUID(userId,str);
         if (eatenFoods.size()>0) {
             for (EatenFood eatenFood : eatenFoods) {
                 System.out.println(eatenFood);
@@ -103,7 +112,7 @@ public class ShowFoodActivity extends AppCompatActivity {
     //添加已经选中的食物到数据库
     public void AddEatenFood(View view){
 
-        //TODO 模拟添加到数据库
+
 //        EatenFood eatenFood11 = new EatenFood(0,1,"2020-6-18","1,24,22","80,80,80",1500);
 //        eatenFoodList.add(eatenFood11);
         foodService.AddEatenFood(eatenFoodList);
@@ -220,5 +229,9 @@ public class ShowFoodActivity extends AppCompatActivity {
 
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public static int getUserId(){
+        return userId;
     }
 }

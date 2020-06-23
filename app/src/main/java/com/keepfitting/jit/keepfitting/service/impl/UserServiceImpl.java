@@ -61,6 +61,13 @@ public class UserServiceImpl  implements UserService {
 
     }
 
+    @Override
+    public int getNeedCalByUserId(int userId) {
+        User user = userDao.findUserByUserID(userId);
+        int needCal = (int) Math.round(user.getConsumeREE()*user.getDayrate());
+        return needCal;
+    }
+
 //
 //    @Override
 //    public boolean userRegist(User user) {
