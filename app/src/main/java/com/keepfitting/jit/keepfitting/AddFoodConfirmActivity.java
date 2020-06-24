@@ -131,7 +131,7 @@ public class AddFoodConfirmActivity extends Activity {
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 //        String str = df.format(new Date());
         EatenFood eatenFood = new EatenFood(userId,food_style,date,food.getFoodId(),food_weight,1500);
-        Toast.makeText(AddFoodConfirmActivity.this, eatenFood.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AddFoodConfirmActivity.this, eatenFood.toString(), Toast.LENGTH_SHORT).show();
 
         //将需要添加的食物返回给上一个页面
         Intent intent = new Intent(this,ShowFoodActivity.class);

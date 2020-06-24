@@ -112,7 +112,7 @@ public class AddSportConfirmActivity extends Activity {
 
 
         DoneSport doneSport = new DoneSport(userId,date,sport.getSportId(),sport_time);
-        Toast.makeText(AddSportConfirmActivity.this,doneSport.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AddSportConfirmActivity.this,doneSport.toString(), Toast.LENGTH_SHORT).show();
 
         //将需要添加的运动返回给上一个页面
         Intent intent = new Intent(this,ShowSportActivity.class);
