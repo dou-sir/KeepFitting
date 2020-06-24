@@ -106,16 +106,16 @@ public class ModifyUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                User tomodify =  User();
-                tomodify.setHigh(high);
-                tomodify.setBirthday(birthday);
+             //   User tomodify =  User();
+             //   tomodify.setHigh(high);
+              //  tomodify.setBirthday(birthday);
                 //          System.out.println("aaa"+phoneNumber+toadd.toString());
                // tomodify = userService.modifyUser(tomodify);
 
                 Intent intent = new Intent(ModifyUserActivity.this,MainActivity.class);
-                intent.putExtra("user",tomodify);
-                tomodify.setUstate(1);
-                userService.modifyUser(tomodify);
+           //     intent.putExtra("user",tomodify);
+            //    tomodify.setUstate(1);
+           //     userService.modifyUser(tomodify);
 
                 Toast.makeText(ModifyUserActivity.this, "修改成功", Toast.LENGTH_LONG).show();
                 startActivity(intent);
