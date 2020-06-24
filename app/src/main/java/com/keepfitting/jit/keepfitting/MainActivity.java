@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     case R.id.nav_showself:
                         Intent intent2 = new Intent(MainActivity.this,KonwMeActivity.class);
+                        intent2.putExtra("userId",userinfo.getUserID());
                         startActivity(intent2);
                         break;
                     case R.id.nav_modify_user:

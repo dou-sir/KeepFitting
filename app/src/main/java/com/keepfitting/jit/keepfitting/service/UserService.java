@@ -55,4 +55,18 @@ public interface UserService {
     //------------------XY--------------
     //通过uid  找到用户 得到每天需要摄入的能量
     public int getNeedCalByUserId(int userId);
+
+    /**
+     * 通过UID 获取本人的标准体重
+     * @param userId
+     * @return
+     */
+    public float getStandardWeight(int userId);
+
+    /**
+     * 通过UID 获取健康体重范围
+     */
+    public String getWeightRange(int userId);
+
+
 }

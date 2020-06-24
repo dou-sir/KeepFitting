@@ -112,6 +112,41 @@ public class UserServiceImpl  implements UserService {
         }
     }
 
+    @Override
+    public float getStandardWeight(int userId) {
+        User user = userDao.findUserByUserID(userId);
+        //将Str改为int
+        int height = Integer.parseInt(user.getHigh());
+        int sex = user.getSex();
+        float standardWeight = 0;
+        if (sex==1){
+            //男性
+             double x = 0.7;
+             standardWeight = Math.round((height-80)*x);
+        }else{
+            //女性
+            double x = 0.6;
+            standardWeight = Math.round((height-70)*x);
+        }
+        //float保留两位小数
+        standardWeight=(float)Math.round(standardWeight*100)/100;
+        return standardWeight;
+    }
+
+    @Override
+    public String getWeightRange(int userId) {
+        double standardWeight = (double) getStandardWeight(userId);
+        double minWeight = standardWeight * 0.9;
+        double maxWeight = standardWeight * 1.1;
+        minWeight = (double) Math.round(minWeight*100)/100;
+        maxWeight = (double) Math.round(maxWeight*100)/100;
+        String weightRange = minWeight + "~" + maxWeight;
+
+        return weightRange;
+    }
+
+
+
 //
 //    @Override
 //    public boolean userRegist(User user) {

@@ -22,6 +22,8 @@ public class BodyData implements Serializable {
     private float standardWeight = 60;
     private float maxHeart = 200;
 
+    public BodyData() {
+    }
 
     public float getBmi() {
         float high = getHigh()/100;
