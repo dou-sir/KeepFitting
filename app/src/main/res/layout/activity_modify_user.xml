@@ -8,14 +8,6 @@
     tools:context="com.keepfitting.jit.keepfitting.ModifyUserActivity">
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-
-
-
-    </LinearLayout>
 
 
     <TextView
@@ -34,7 +26,6 @@
         android:id="@+id/rg_sex"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-
         android:layout_margin="20dp"
         android:layout_toRightOf="@id/tv_modify_sex"
         android:layout_height="wrap_content">
@@ -60,14 +51,6 @@
     </RadioGroup>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-
-    </LinearLayout>
-
 
     <TextView
         style="@style/text_title"
@@ -79,8 +62,10 @@
         android:text="生日"
         android:id="@+id/textView2" />
 
-    <TextView
-        android:id="@+id/tv_register_birthday"
+
+
+    <EditText
+        android:id="@+id/et_register_birthday"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/rg_sex"
@@ -99,11 +84,11 @@
         android:text="身高"
         android:id="@+id/textView3" />
 
-    <TextView
-        android:id="@+id/tv_register_high"
+    <EditText
+        android:id="@+id/et_register_high"
         android:layout_width="300dp"
         android:layout_height="30dp"
-        android:layout_alignStart="@+id/tv_register_birthday"
+        android:layout_alignStart="@+id/et_register_birthday"
         android:layout_alignTop="@+id/textView3"
         android:background="@color/gray"
         android:gravity="center" />
@@ -114,14 +99,14 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignLeft="@id/textView3"
-        android:layout_below="@+id/tv_register_high"
+        android:layout_below="@+id/et_register_high"
         android:layout_marginTop="30dp"
-        android:layout_toStartOf="@+id/tv_register_high"
-        android:text="体重"
+        android:layout_toStartOf="@+id/et_register_high"
+        android:text="BMI"
         android:id="@+id/textView4" />
 
-    <TextView
-        android:id="@+id/tv_register_weight"
+    <EditText
+        android:id="@+id/et_register_weight"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_alignTop="@+id/textView4"
@@ -145,7 +130,7 @@
         style="@style/text_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_register_weight"
+        android:layout_below="@+id/et_register_weight"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
         android:drawableLeft="@mipmap/ic_light_person"
@@ -161,6 +146,17 @@
         android:layout_below="@+id/tv_modify_action"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp"
-        android:text="完成" />
+        android:text="修改" />
+
+
+
+    <Button
+        android:id="@+id/bt_modify_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/bt_modify_complete"
+        android:text="返回"/>
+
 
 </RelativeLayout>
