@@ -218,9 +218,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 User user = new User();
                                 user.setPhone(phoneNumber);
-                                userService.addUser(user);
+                                user=userService.addUser(user);
                                 intent.putExtra("user",user);
                                 startActivity(intent);
+                                LoginActivity.this.finish();
                             } else {
                                 Toast.makeText(LoginActivity.this, "请重试", Toast.LENGTH_SHORT).show();
                             }
