@@ -16,14 +16,15 @@ import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.service.UserService;
 import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 
+import java.util.Date;
 
 
 public class ModifyUserActivity extends AppCompatActivity {
 
 
     private Button bt_modify_back,bt_modify_complete;
-    private EditText et_register_birthday,et_register_high,et_register_weight;
-    public static User userinfo;
+    private EditText et_register_birthday,et_register_high,et_register_weight,et_register_nickname;
+    public  User userinfo;
     private UserService userService;
     private RadioGroup rg_sex;
     private RadioGroup rb_register_male;
@@ -58,8 +59,8 @@ public class ModifyUserActivity extends AppCompatActivity {
         et_register_birthday=findViewById(R.id.et_register_birthday);
         et_register_high=findViewById(R.id.et_register_high);
         et_register_weight=findViewById(R.id.et_register_weight);
+        et_register_nickname=findViewById(R.id.et_register_nickname);
         rg_sex=findViewById(R.id.rg_sex);
-
 
 
 
@@ -68,26 +69,14 @@ public class ModifyUserActivity extends AppCompatActivity {
        //身高信息
         et_register_high.setText(userinfo.getHigh());
         //BMI信息
-        et_register_weight.setText(userinfo.getBMI()+"");
+        et_register_weight.setText(userService.getWeightByUserID(userinfo.getUserID())+"");
+
+        et_register_nickname.setText(userinfo.getNickname());
 
 
-
-
-       high=et_register_high.getText().toString();
-       birthday=et_register_birthday.getText().toString();
+//       high=et_register_high.getText().toString();
+//       birthday=et_register_birthday.getText().toString();
       // bmi=et_register_weight.getText();
-
-//
-//        RadioGroup radgroup = (RadioGroup) findViewById(R.id.rg_sex);
-//        //第一种获得单选按钮值的方法
-//        //为radioGroup设置一个监听器:setOnCheckedChanged()
-//        radgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton radbtn = (RadioButton) findViewById(checkedId);
-//                Toast.makeText(getApplicationContext(), "你选了" + radbtn.getText(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
 
 
@@ -96,8 +85,6 @@ public class ModifyUserActivity extends AppCompatActivity {
         bt_modify_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ModifyUserActivity.this,MainActivity.class);
-                startActivity(intent);
                 ModifyUserActivity.this.finish();
             }
         });
@@ -106,23 +93,19 @@ public class ModifyUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-             //   User tomodify =  User();
-             //   tomodify.setHigh(high);
-              //  tomodify.setBirthday(birthday);
-                //          System.out.println("aaa"+phoneNumber+toadd.toString());
-               // tomodify = userService.modifyUser(tomodify);
+//                if(et_register_birthday.getText()){
+//
+//                }
 
-                Intent intent = new Intent(ModifyUserActivity.this,MainActivity.class);
-           //     intent.putExtra("user",tomodify);
-            //    tomodify.setUstate(1);
-           //     userService.modifyUser(tomodify);
-
-                Toast.makeText(ModifyUserActivity.this, "修改成功", Toast.LENGTH_LONG).show();
-                startActivity(intent);
-                ModifyUserActivity.this.finish();
-
-
-
+            //    int userID= user.getUserID();
+                User user1=new User(1,"","","",1,"","",22.5f,2000f,1800,1607.5f,1.5f,63,165,0);
+                boolean b=userService.modifyUser(user1);
+                if(b){
+                    startActivity(new Intent(ModifyUserActivity.this,MainActivity.class));
+                    ModifyUserActivity.this.finish();
+                }else{
+                    System.out.println("修改失败!");
+                }
 
 
 
