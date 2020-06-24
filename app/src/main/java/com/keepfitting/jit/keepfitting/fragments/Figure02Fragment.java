@@ -1,6 +1,9 @@
 package com.keepfitting.jit.keepfitting.fragments;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,11 +12,13 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
+import com.keepfitting.jit.keepfitting.LoginByPwdActivity;
 import com.keepfitting.jit.keepfitting.MainActivity;
 import com.keepfitting.jit.keepfitting.entity.Figure;
 import com.keepfitting.jit.keepfitting.service.FigureService;
@@ -32,6 +37,7 @@ public class Figure02Fragment extends Fragment {
 
     private TextView tv_unit;
     private LineChart lc_chart;
+    private ImageButton ib_refresh;
     private FigureService figureService;
     private List<Figure> figureList;
 
@@ -90,7 +96,24 @@ public class Figure02Fragment extends Fragment {
         btn_addfigure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
+                if (MainActivity.userinfo.getUserID()!=0)
+                    dialog.show();
+                else {
+                    AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                    builder.setTitle("提示" )
+                            .setMessage("请登录" )
+                            .setPositiveButton("去登录" ,   new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getContext(),LoginByPwdActivity.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                }
+                            });//TODO
+                    builder.setNegativeButton("取消",null);
+                    //创建对话框
+                    builder.create().show();
+                }
             }
         });
 
@@ -100,7 +123,23 @@ public class Figure02Fragment extends Fragment {
     private void initShowView(View view){
         tv_unit = view.findViewById(R.id.tv_unit);
         lc_chart = view.findViewById(R.id.lc_chart);
-        
+        ib_refresh = view.findViewById(R.id.ib_refresh);
+
+        ib_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation mAnimationRight = AnimationUtils.loadAnimation(getContext(), R.anim.refresh_rotate);
+                ib_refresh.startAnimation(mAnimationRight);
+
+                figureList = figureService.findFigureByType(MainActivity.userinfo.getUserID(),figureType);
+                List<String> date = getDateString();
+                ChartUtils.initChart(lc_chart, date.size(),getContext());
+                if (date.size() > 1){
+                    List<Entry> data = getData();
+                    ChartUtils.notifyDataSetChanged(lc_chart, data, date);
+                }
+            }
+        });
 
         Animation mAnimationRight = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_right);
         mAnimationRight.setFillAfter(true);

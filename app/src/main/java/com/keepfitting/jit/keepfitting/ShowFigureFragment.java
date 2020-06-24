@@ -1,7 +1,10 @@
 package com.keepfitting.jit.keepfitting;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -114,7 +117,24 @@ public class ShowFigureFragment extends Fragment  {
             fab_write.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog.show();
+                    if (MainActivity.userinfo.getUserID()!=0)
+                        dialog.show();
+                    else {
+                        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                        builder.setTitle("提示" )
+                                .setMessage("请登录" )
+                                .setPositiveButton("去登录" ,   new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getContext(),LoginByPwdActivity.class);
+                                        startActivity(intent);
+                                        getActivity().finish();
+                                    }
+                                });//TODO
+                        builder.setNegativeButton("取消",null);
+                        //创建对话框
+                        builder.create().show();
+                    }
                 }
             });
             tv_recenttime.setText(figureService.findRecentByType(MainActivity.userinfo.getUserID(),findFigureType()).getRecordDate());
