@@ -33,6 +33,8 @@ public class GoalDetailsActivity extends AppCompatActivity {
     ImageView back;
     boolean startdataFlag,goaldataFlag,starttimeFlag,endtimeFlag,typeFlag;
     int b;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,9 +210,7 @@ public class GoalDetailsActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(GoalDetailsActivity.this,GoalActivity.class);
-                startActivity(intent);
-                GoalDetailsActivity.this.finish();
+                finish();
             }
         });
 

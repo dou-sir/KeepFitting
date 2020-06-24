@@ -7,7 +7,7 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:background="@color/colorPrimary"
         app:tabMode="scrollable"
         app:tabTextColor="#fff"
@@ -33,6 +33,29 @@
             app:elevation="10dp"
             app:borderWidth="0dp"
             app:pressedTranslationZ="50dp"/>
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom|start"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/smssdk_black"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="最近一次记录时间为："/>
+            <TextView
+                android:id="@+id/tv_recenttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:textSize="20dp"
+                android:text="暂无数据" />
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>
 

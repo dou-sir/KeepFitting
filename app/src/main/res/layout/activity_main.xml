@@ -12,16 +12,27 @@
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:paddingTop="5dp"
             android:paddingLeft="5dp"
             android:background="#4151b5">
             <ImageView
                 android:id="@+id/iv_menu"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
+                android:layout_width="45dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/main"/>
+            <TextView
+                android:id="@+id/tv_bar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="主页"
+                android:textSize="22dp"
+                android:textColor="#e4e2a8"
+                android:textStyle="bold"/>
         </RelativeLayout>
         <LinearLayout
             android:id="@+id/ll_main"

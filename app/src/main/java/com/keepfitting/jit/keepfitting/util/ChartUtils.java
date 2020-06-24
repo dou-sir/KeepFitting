@@ -24,6 +24,7 @@ import com.keepfitting.jit.keepfitting.DetailsMarkerView;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +60,8 @@ public class ChartUtils extends CombinedChart{
     public static LineChart initChart(LineChart chart, int size, Context mcontext) {
         /***图表设置***/
         // 没有数据的时候，显示“暂无数据”
-        chart.setNoDataText("暂无数据");
+        chart.setNoDataText("数据不足(至少需要两条数据)");
+        chart.setNoDataTextColor(Color.RED);
         // 不显示表格颜色
         chart.setDrawGridBackground(false);
         //是否展示网格线
@@ -102,10 +104,10 @@ public class ChartUtils extends CombinedChart{
         leftYAxis.setTextColor(Color.parseColor("#8B0000"));
         //X轴设置显示位置在底部
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setAxisMinimum(0f);
+//        xAxis.setAxisMinimum(0f);
         xAxis.setGranularity(1f);
-        //保证Y轴从0开始，不然会上移一点
-        leftYAxis.setAxisMinimum(0f);
+        //设置y轴最小值
+//        leftYAxis.setAxisMinimum(0f);
 //        rightYaxis.setAxisMinimum(0f);
 
         /***折线图例 标签 设置***/
@@ -122,11 +124,14 @@ public class ChartUtils extends CombinedChart{
 
         Matrix matrix = new Matrix();
 //         x轴缩放1.5倍
-        matrix.postScale(3f, 1f);
+        if (size>5){
+            matrix.postScale(3f, 1f);
+        }
+
 //         在图表动画显示之前进行缩放
         chart.getViewPortHandler().refresh(matrix, chart, false);
 //         x轴执行动画
-        chart.animateX(500);
+//        chart.animateX(500);
 //                定位到最新
         chart.moveViewToX(size-1);
 
@@ -198,13 +203,13 @@ public class ChartUtils extends CombinedChart{
      * @param values  数据
      * @param //valueType 数据类型
      */
-    public static void notifyDataSetChanged(LineChart chart, final List<Entry> values) {//,final int valueType
+    public static void notifyDataSetChanged(LineChart chart, final List<Entry> values,final List<String> dates) {//
         chart.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 int size = values.size();
 
-                return xValuesProcess(size)[(int) value];//todo????
+                return xValuesProcess(size,dates)[(int) value];//todo????
             }
         });
 
@@ -220,18 +225,25 @@ public class ChartUtils extends CombinedChart{
      * @param //valueType 数据类型
      * @return x轴数据
      */
-    private static String[] xValuesProcess(int size) {//, String date
+    private static String[] xValuesProcess(int size,List<String> dates) {//, String date
         // 月
         String[] monthValues = new String[size];
-        long currentTime = System.currentTimeMillis();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
         for (int i = size-1; i >= 0; i--) {
-            monthValues[i] = formatter.format(new Date(currentTime));//TimeUtils.dateToString(currentTime, TimeUtils.dateFormat_month);
-            if(monthValues[i].equals("06-10")){
-                monthValues[i] = "20/06-10";
-            }
-            currentTime -= (24 * 60 * 60 * 1000);
+//            if (dates.get(i).substring(5,10).equals("01-01"))
+                monthValues[i] = dates.get(i).substring(5,10);
+//            else
+//                monthValues[i] = dates.get(i).substring(5,10);
         }
+
+//        long currentTime = System.currentTimeMillis();
+//        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
+//        for (int i = size-1; i >= 0; i--) {
+//            monthValues[i] = formatter.format(new Date(currentTime));//TimeUtils.dateToString(currentTime, TimeUtils.dateFormat_month);
+//            if(monthValues[i].equals("06-10")){
+//                monthValues[i] = "20/06-10";
+//            }
+//            currentTime -= (24 * 60 * 60 * 1000);
+//        }
         return monthValues;
     }
 

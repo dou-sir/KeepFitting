@@ -10,7 +10,7 @@
         android:paddingBottom="100dp"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_figureTitle"
+            android:id="@+id/tv_figure_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/smssdk_black"
@@ -23,16 +23,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="13dp"
-            android:text="上次记录时间：2020-20-20" />
+            android:text="上次记录时间： 暂无数据" />
         <TextView
-            android:id="@+id/tv_figureNum"
+            android:id="@+id/tv_figure_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textColor="#512939"
             android:textStyle="bold"
             android:textSize="50dp"
-            android:text="60.0"/>
+            android:text="暂无数据"/>
         <Button
             android:id="@+id/btn_addfigure"
             android:layout_width="100dp"

@@ -24,7 +24,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.service.UserService;
+import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 import com.mob.tools.FakeActivity;
 import com.mob.tools.utils.ResHelper;
 import com.mob.tools.utils.SharePrefrenceHelper;
@@ -80,6 +82,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        userService = new UserServiceImpl(this);
+        if (userService.findUserByUstate().getUserID()!=0){
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            User user = userService.findUserByUstate();
+            intent.putExtra("user",user);
+            startActivity(intent);
+            LoginActivity.this.finish();
+        }
+
         initView();
 
 
