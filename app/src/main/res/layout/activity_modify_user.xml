@@ -102,7 +102,7 @@
         android:layout_below="@+id/et_register_high"
         android:layout_marginTop="30dp"
         android:layout_toStartOf="@+id/et_register_high"
-        android:text="BMI"
+        android:text="体重"
         android:id="@+id/textView4" />
 
     <EditText
@@ -116,6 +116,7 @@
 
 
     <TextView
+        android:id="@+id/tv_modify_leixing"
         style="@style/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -137,6 +138,31 @@
         android:drawablePadding="20dp"
         android:gravity="center"
         android:text="轻体力活" />
+
+
+    <TextView
+        android:id="@+id/tv_modify_nickname"
+        style="@style/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/tv_modify_leixing"
+        android:layout_below="@+id/tv_modify_action"
+        android:layout_marginTop="22dp"
+        android:text="昵称" />
+
+    <EditText
+        android:id="@+id/et_register_nickname"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+
+        android:layout_alignBaseline="@+id/tv_modify_nickname"
+        android:layout_alignBottom="@+id/tv_modify_nickname"
+        android:layout_alignStart="@+id/et_register_weight"
+        android:background="@color/gray"
+        android:gravity="center" />
+
+
 
 
     <Button

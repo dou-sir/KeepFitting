@@ -152,7 +152,8 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     case R.id.nav_modify_user:
                         Intent intent3 = new Intent(MainActivity.this,ModifyUserActivity.class);
-                        startActivity(intent3);
+                        intent3.putExtra("user", userinfo);
+                        startActivityForResult(intent3,111);
                         break;
                     default:
                 }
@@ -189,6 +190,10 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 //todo 跳到个人信息
+
+                Intent intent = new Intent(MainActivity.this,ModifyUserActivity.class);
+                intent.putExtra("user", userinfo);
+                startActivityForResult(intent,111);
             }
         });
 
