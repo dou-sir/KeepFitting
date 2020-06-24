@@ -1,6 +1,7 @@
 package com.keepfitting.jit.keepfitting;
 
 import com.keepfitting.jit.keepfitting.entity.User;
+import com.keepfitting.jit.keepfitting.service.UserService;
 import com.keepfitting.jit.keepfitting.util.TimeUtil;
 
 import java.io.Serializable;
@@ -21,13 +22,15 @@ public class BodyData implements Serializable {
     private float consumeREE = 1500;
     private float standardWeight = 60;
     private float maxHeart = 200;
+    private UserService userService;
+    private User userinfo;
 
     public BodyData() {
     }
 
     public float getBmi() {
         float high = getHigh()/100;
-        bmi = getGoalRecordData()/(high * high);
+        bmi = userService.getWeightByUserID(userinfo.getUserID())/(high * high);
         return bmi;
     }
 

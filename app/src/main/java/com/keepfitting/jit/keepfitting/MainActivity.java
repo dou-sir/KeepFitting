@@ -250,7 +250,12 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_main);
+        init();
+    }
 
     private void fmTransaction(Fragment fragment){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

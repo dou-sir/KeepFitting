@@ -23,7 +23,7 @@ public class KonwMeActivity extends AppCompatActivity {
     public static User userinfo;
     private float standardWeight;
     private BodyData bodyData;
-    private float high;
+    private float high,bmi;
     private Button bt_know_back;
 
     private GoalService goalService;
@@ -31,10 +31,15 @@ public class KonwMeActivity extends AppCompatActivity {
     private int userId;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_konw_me);
+
+
 
 
         userService = new UserServiceImpl(this);
@@ -90,11 +95,16 @@ public class KonwMeActivity extends AppCompatActivity {
         tv_konwme_xinlv.setText(String.format("%s 次/分钟到 %s 次/分钟", heartbeat * 0.6, heartbeat * 0.75));
 
 
-
+        float bmi;
         //设置BMI
-        String BMI ;
-        BMI= userinfo.getBMI()+"";
-        tv_knowme_bmi.setText(BMI);
+        float high = Float.parseFloat(userinfo.getHigh())/100;
+        float weigth=userService.getWeightByUserID(userinfo.getUserID());
+        System.out.println(weigth);
+        System.out.println(high);
+        bmi= weigth/(high * high);
+//        String BMI ;
+//        BMI= userinfo.getBMI()+"";
+        tv_knowme_bmi.setText(String.format("%.2f",bmi));
 
 
 
@@ -111,5 +121,7 @@ public class KonwMeActivity extends AppCompatActivity {
     }
 
 
-
+    public float getHigh() {
+        return high;
+    }
 }
