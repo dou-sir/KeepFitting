@@ -83,6 +83,25 @@ public class MainActivity extends AppCompatActivity{
         init();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 111 && resultCode == 222){
+
+            userinfo = (User)data.getSerializableExtra("user");
+            View nav_head = nav_view.getHeaderView(0);
+            tv_username = nav_head.findViewById(R.id.tv_username);
+            String hiName = "Hi,";
+            if(userinfo.getNickname()!=null){
+                if (userinfo.getNickname().length() > 11)
+                    hiName += userinfo.getNickname().substring(0,10)+"...";
+                else hiName += userinfo.getNickname();
+            }
+            tv_username.setText(hiName);
+            System.out.println("gg"+userinfo.toString());
+        }
+    }
+
     private void init(){
 
         iv_menu = findViewById(R.id.iv_menu);

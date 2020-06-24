@@ -16,6 +16,7 @@ import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.service.UserService;
 import com.keepfitting.jit.keepfitting.service.impl.UserServiceImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -93,24 +94,48 @@ public class ModifyUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                if(et_register_birthday.getText()){
-//
-//                }
+                if(!(et_register_birthday.getText().toString().equals("") ||
+                        et_register_high.getText().toString().equals("") ||
+                        et_register_weight.getText().toString().equals("") ||
+                        et_register_nickname.getText().toString().equals("") )){
+                    //判断通过
+                    User user= userinfo;
+                    user.setBirthday(et_register_birthday.getText().toString());
+                    user.setHigh(et_register_high.getText().toString());
+                    user.setNickname(et_register_nickname.getText().toString());
+                    System.out.println("ggg"+user.toString());
+                    boolean  a = userService.modifyUser(user);
+                    long currentTime = System.currentTimeMillis();
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    Figure figure = new Figure(user.getUserID(),"weight", Float.parseFloat(et_register_weight.getText().toString()), formatter.format(new Date(currentTime)));
+                    boolean b = userService.setWeightByFigure(figure);
+                    if (a&&b){
+                        //成功
+                        Intent intent = new Intent();
+                        intent.putExtra("user",user);
+                        setResult(222,intent);
+                        finish();
+                    }else if (a && !b){
 
-            //    int userID= user.getUserID();
-                User user1=new User(1,"","","",1,"","",22.5f,2000f,1800,1607.5f,1.5f,63,165,0);
-                boolean b=userService.modifyUser(user1);
-                if(b){
-//                    startActivity(new Intent(ModifyUserActivity.this,MainActivity.class));
-//                    ModifyUserActivity.this.finish();
-                }else{
-                    System.out.println("修改失败!!");
+                    }else if (b && !a){
+
+                    }else {
+
+                    }
+
+                }else {
+                    //有空值
                 }
 
-
-
-
-
+            //    int userID= user.getUserID();
+//                User user1=new User(1,"","","",1,"","",22.5f,2000f,1800,1607.5f,1.5f,63,165,0);
+//                boolean b=userService.modifyUser(user1);
+//                if(b){
+//                    startActivity(new Intent(ModifyUserActivity.this,MainActivity.class));
+//
+//                }else{
+//                    System.out.println("修改失败!!");
+//                }
 
 
 
