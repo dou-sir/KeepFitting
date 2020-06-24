@@ -1,5 +1,6 @@
 package com.keepfitting.jit.keepfitting.service;
 
+import com.keepfitting.jit.keepfitting.entity.Figure;
 import com.keepfitting.jit.keepfitting.entity.User;
 
 
@@ -40,7 +41,9 @@ public interface UserService {
     public int checkLogin(String nickname, String authToken);
 
 
+    public float getWeightByUserID( int UserID);
 
+    public boolean setWeightByFigure(Figure figure);
     //public boolean userRegist(User user);
     //重复
 //    public List<User> findUserByPhone(String phone);

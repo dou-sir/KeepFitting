@@ -2,8 +2,11 @@ package com.keepfitting.jit.keepfitting.service.impl;
 
 import android.content.Context;
 
+import com.keepfitting.jit.keepfitting.dao.FigureDao;
 import com.keepfitting.jit.keepfitting.dao.UserDao;
+import com.keepfitting.jit.keepfitting.dao.impl.FigureDaoImpl;
 import com.keepfitting.jit.keepfitting.dao.impl.UserDaoImpl;
+import com.keepfitting.jit.keepfitting.entity.Figure;
 import com.keepfitting.jit.keepfitting.entity.User;
 import com.keepfitting.jit.keepfitting.service.UserService;
 
@@ -11,9 +14,11 @@ public class UserServiceImpl  implements UserService {
 
 
     private UserDao userDao ;
+    private FigureDao figureDao;
 
     public UserServiceImpl(Context context){
         userDao = new UserDaoImpl(context);
+        figureDao = new FigureDaoImpl(context);
     }
 
     @Override
@@ -61,6 +66,36 @@ public class UserServiceImpl  implements UserService {
         }
         return 0;
 
+    }
+
+    @Override
+    public float getWeightByUserID(int UserID) {
+        int size = figureDao.findFigureByType(UserID,"weight").size();
+        if (size==0){
+            return 0;
+        }
+        Float weight = figureDao.findFigureByType(UserID,"weight").get(size-1).getFigureData();
+        return weight;
+    }
+
+    @Override
+    public boolean setWeightByFigure(Figure figure) {
+        //尝试添加用户体重数据
+        int size = figureDao.findFigureByType(figure.getUserId(),figure.getFigureType()).size();
+        if (size!=0){
+            Figure recentFigure = figureDao.findFigureByType(figure.getUserId(),figure.getFigureType()).get(size-1);
+            if (recentFigure.getRecordDate().equals(figure.getRecordDate())) {
+                //修改用户体重数据
+                try {
+                    figureDao.modifyFigure(figure);
+                    return true;
+                }catch (Exception e){
+                    return false;
+                }
+            }
+        }
+        figureDao.addFigure(figure);
+        return true;
     }
 
     @Override

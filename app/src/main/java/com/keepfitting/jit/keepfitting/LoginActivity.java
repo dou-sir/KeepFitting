@@ -216,6 +216,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (result == SMSSDK.RESULT_COMPLETE) {
                                 Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                User user = new User();
+                                user.setPhone(phoneNumber);
+                                userService.addUser(user);
+                                intent.putExtra("user",user);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(LoginActivity.this, "请重试", Toast.LENGTH_SHORT).show();
