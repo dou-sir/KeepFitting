@@ -198,9 +198,7 @@ public class GoalDetailsActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(GoalDetailsActivity.this,GoalActivity.class);
-                startActivity(intent);
-                GoalDetailsActivity.this.finish();
+                finish();
             }
         });
 

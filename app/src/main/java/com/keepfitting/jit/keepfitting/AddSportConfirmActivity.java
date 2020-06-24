@@ -1,9 +1,13 @@
 package com.keepfitting.jit.keepfitting;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -16,7 +20,7 @@ import com.keepfitting.jit.keepfitting.entity.Sport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddSportConfirmActivity extends AppCompatActivity {
+public class AddSportConfirmActivity extends Activity {
 
     private ImageView iv_add_sport_img;
     private TextView tv_add_sport_name,tv_add_sport_cal;
@@ -30,11 +34,31 @@ public class AddSportConfirmActivity extends AppCompatActivity {
 
     private String date;
 
+    //定义Activity退出动画的成员变量
+    protected int activityCloseEnterAnimation;
+    protected int activityCloseExitAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_sport_confirm);
+
+
+
+        TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
+        int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);
+        activityStyle.recycle();
+        activityStyle = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[] {android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
+        activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
+        activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
+        activityStyle.recycle();
+
+        //设置布局在底部
+        getWindow().setGravity(Gravity.BOTTOM);
+        //设置布局填充满宽度
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.width= WindowManager.LayoutParams.MATCH_PARENT;
+        getWindow().setAttributes(layoutParams);
 
         init();
     }
@@ -88,7 +112,7 @@ public class AddSportConfirmActivity extends AppCompatActivity {
 
 
         DoneSport doneSport = new DoneSport(userId,date,sport.getSportId(),sport_time);
-        Toast.makeText(AddSportConfirmActivity.this,doneSport.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AddSportConfirmActivity.this,doneSport.toString(), Toast.LENGTH_SHORT).show();
 
         //将需要添加的运动返回给上一个页面
         Intent intent = new Intent(this,ShowSportActivity.class);
@@ -114,4 +138,10 @@ public class AddSportConfirmActivity extends AppCompatActivity {
 //        lp.height = 300;
 //        getWindowManager().updateViewLayout(view, lp);
 //    }
+
+    public void finish() {
+        super.finish();
+        //finish时调用退出动画
+        overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
+    }
 }
