@@ -1,9 +1,13 @@
 package com.keepfitting.jit.keepfitting;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -16,7 +20,7 @@ import com.keepfitting.jit.keepfitting.entity.Food;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddFoodConfirmActivity extends AppCompatActivity {
+public class AddFoodConfirmActivity extends Activity {
     private ImageView iv_cancel,iv_add_food_img;
     private TextView tv_add_food_name,tv_add_food_cal;
     private NumberPicker np_add_food_style,np_add_food_weight;
@@ -30,10 +34,32 @@ public class AddFoodConfirmActivity extends AppCompatActivity {
     private int userId;
     private String date;
 
+    //定义Activity退出动画的成员变量
+    protected int activityCloseEnterAnimation;
+    protected int activityCloseExitAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food_confirm);
+
+
+
+        TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
+        int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);
+        activityStyle.recycle();
+        activityStyle = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[] {android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
+        activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
+        activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
+        activityStyle.recycle();
+
+        //设置布局在底部
+        getWindow().setGravity(Gravity.BOTTOM);
+        //设置布局填充满宽度
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.width= WindowManager.LayoutParams.MATCH_PARENT;
+        getWindow().setAttributes(layoutParams);
+
 
         initComponent();
     }
@@ -133,4 +159,10 @@ public class AddFoodConfirmActivity extends AppCompatActivity {
 //        lp.height = 300;
 //        getWindowManager().updateViewLayout(view, lp);
 //    }
+
+    public void finish() {
+        super.finish();
+        //finish时调用退出动画
+        overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
+    }
 }

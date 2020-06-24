@@ -39,8 +39,10 @@
         <activity android:name=".GoalAddActivity" />
         <activity android:name=".ShowFoodActivity" />
         <activity android:name=".ShowSportActivity" />
-        <activity android:name=".AddFoodConfirmActivity" />
-        <activity android:name=".AddSportConfirmActivity" />
+        <activity android:name=".AddFoodConfirmActivity"
+            android:theme="@style/ActivityDialogTheme"/>
+        <activity android:name=".AddSportConfirmActivity"
+            android:theme="@style/ActivityDialogTheme"/>
         <activity android:name=".FoodConditionActivity" />
         <activity android:name=".SportConditionActivity"></activity>
     </application>
