@@ -172,6 +172,7 @@ public class FoodConditionActivity extends AppCompatActivity {
                     lv_dinner.setVisibility(View.VISIBLE);
                     setListViewHeight(lv_dinner);
 
+                    
                     //提示消失
                     tv_dinner_remind.setVisibility(View.GONE);
                     dinnerCal = getTotalCal(clas);
