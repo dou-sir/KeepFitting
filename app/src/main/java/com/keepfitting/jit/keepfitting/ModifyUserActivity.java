@@ -101,8 +101,8 @@ public class ModifyUserActivity extends AppCompatActivity {
                 User user1=new User(1,"","","",1,"","",22.5f,2000f,1800,1607.5f,1.5f,63,165,0);
                 boolean b=userService.modifyUser(user1);
                 if(b){
-                    startActivity(new Intent(ModifyUserActivity.this,MainActivity.class));
-                    ModifyUserActivity.this.finish();
+//                    startActivity(new Intent(ModifyUserActivity.this,MainActivity.class));
+//                    ModifyUserActivity.this.finish();
                 }else{
                     System.out.println("修改失败!");
                 }
