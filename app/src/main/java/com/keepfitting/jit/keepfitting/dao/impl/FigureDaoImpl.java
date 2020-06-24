@@ -78,10 +78,10 @@ public class FigureDaoImpl implements FigureDao {
      */
     @Override
     public void modifyFigure(Figure figure) {
-        String sql= "update tb_figure set figureData=? where figureId=? ";
+        String sql= "update tb_figure set figureData=? where userId=? and figureType=? and recordDate=?";
         //获取可写入数据库
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.execSQL(sql,new Object[]{figure.getFigureData(),figure.getFigureId()});
+        db.execSQL(sql,new Object[]{figure.getFigureData(),figure.getUserId(),figure.getFigureType(),figure.getRecordDate()});
         db.close();
 
     }

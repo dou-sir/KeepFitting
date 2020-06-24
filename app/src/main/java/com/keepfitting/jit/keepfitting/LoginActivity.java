@@ -82,7 +82,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        userService=new UserServiceImpl(this);
+        userService = new UserServiceImpl(this);
+        if (userService.findUserByUstate().getUserID()!=0){
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            User user = userService.findUserByUstate();
+            intent.putExtra("user",user);
+            startActivity(intent);
+            LoginActivity.this.finish();
+        }
+
         initView();
 
 
@@ -132,7 +140,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         et_login_password = findViewById(R.id.et_login_password);
         bt_login_sendmessage = findViewById(R.id.bt_login_sendmessage);
         bt_login_verify=findViewById(R.id.bt_login_verify);
-
     }
 
 
@@ -207,21 +214,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void run() {
                             //提交验证成功，跳转成功页面，否则toast提示
                             if (result == SMSSDK.RESULT_COMPLETE) {
-                                User toadd = new User();
-                                toadd.setPhone(phoneNumber);
-                      //          System.out.println("aaa"+phoneNumber+toadd.toString());
-                                 toadd = userService.addUser(toadd);
-
-                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                 intent.putExtra("user",toadd);
-                                 toadd.setUstate(1);
-                                 userService.modifyUser(toadd);
-
-                                 startActivity(intent);
-                                LoginActivity.this.finish();
-
-
-
+                                Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(LoginActivity.this, "请重试", Toast.LENGTH_SHORT).show();
                             }

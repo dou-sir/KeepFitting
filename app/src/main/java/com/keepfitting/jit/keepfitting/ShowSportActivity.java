@@ -115,7 +115,7 @@ public class ShowSportActivity extends AppCompatActivity {
     }
 
     //搜索食物功能
-    public void SearchSport(){
+    public void SearchSport(View view){
         String str = ed_showSport_search.getText().toString();
         sportList = sportService.SearchSportByName(str);
         sportAdapter = new SportAdapter(sportList,ShowSportActivity.this);

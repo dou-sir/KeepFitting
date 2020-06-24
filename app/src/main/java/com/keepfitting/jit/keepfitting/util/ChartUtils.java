@@ -104,10 +104,10 @@ public class ChartUtils extends CombinedChart{
         leftYAxis.setTextColor(Color.parseColor("#8B0000"));
         //X轴设置显示位置在底部
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setAxisMinimum(0f);
+//        xAxis.setAxisMinimum(0f);
         xAxis.setGranularity(1f);
-        //保证Y轴从0开始，不然会上移一点
-        leftYAxis.setAxisMinimum(0f);
+        //设置y轴最小值
+//        leftYAxis.setAxisMinimum(0f);
 //        rightYaxis.setAxisMinimum(0f);
 
         /***折线图例 标签 设置***/
@@ -124,11 +124,14 @@ public class ChartUtils extends CombinedChart{
 
         Matrix matrix = new Matrix();
 //         x轴缩放1.5倍
-        matrix.postScale(3f, 1f);
+        if (size>5){
+            matrix.postScale(3f, 1f);
+        }
+
 //         在图表动画显示之前进行缩放
         chart.getViewPortHandler().refresh(matrix, chart, false);
 //         x轴执行动画
-        chart.animateX(500);
+//        chart.animateX(500);
 //                定位到最新
         chart.moveViewToX(size-1);
 
