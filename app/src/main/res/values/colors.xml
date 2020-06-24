@@ -6,4 +6,5 @@
     <color name="colorTextOrIcon">#212121</color>
     <color name="gray">#E5E8EF</color>
     <color name="colorSecondaryText">#727272</color>
+    <color name="red">#FF0000</color>
 </resources>

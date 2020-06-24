@@ -37,6 +37,7 @@
         android:id="@+id/tv_knowme_bmi"
         android:layout_toRightOf="@id/tv_knowme"
         android:text="1231"
+        android:textColor="@color/red"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
 
@@ -73,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="58.54kg-65.14kg"
+        android:textColor="@color/red"
         />
 
 </LinearLayout>
@@ -95,7 +97,8 @@
             android:id="@+id/tv_konwme_tizhong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="66.5kg"/>
+            android:text="66.5kg"
+            android:textColor="@color/red"/>
 
 
     </LinearLayout>
@@ -121,7 +124,8 @@
             android:id="@+id/tv_konwme_reliang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2940大卡"/>
+            android:text="2940大卡"
+            android:textColor="@color/red"/>
 
 
 
@@ -131,6 +135,8 @@
 
 
     <TextView
+
+
         android:id="@+id/jieshao2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -138,14 +144,37 @@
         android:text="在活动强度不变情况下消耗的最低热量\n当摄入小于支出时体重下降\n当摄入大于支出时体重增加"
         android:textSize="13sp"/>
 
-    <TextView
-        android:id="@+id/tv_xinlv"
+    <LinearLayout
         android:layout_below="@id/jieshao2"
+        android:id="@+id/tv_xinlv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="中强度运动心率"
         android:textStyle="bold"
         android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_konwme_xinlv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="110"
+            android:textColor="@color/red"
+            />
+
+
+
+    </LinearLayout>
+
+
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -156,7 +185,16 @@
         2 这种中低强度运动心率的运动要持续20分钟以上；\n
         3 这种运动必须是大肌肉群的运动，如慢跑 游泳 健身操等\n
         低于或高于这个心率都不是中强度运动心率，燃烧的也就不是脂肪了
-"/>
+"
+        android:id="@+id/textView" />
+
+    <Button
+        android:id="@+id/bt_know_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textView"
+        android:text="返回"/>
 
 
 
