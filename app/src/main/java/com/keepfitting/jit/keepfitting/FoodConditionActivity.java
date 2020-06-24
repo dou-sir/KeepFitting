@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -129,6 +131,7 @@ public class FoodConditionActivity extends AppCompatActivity {
                     );
                     lv_breakfast.setAdapter(simpleAdapter);
                     lv_breakfast.setVisibility(View.VISIBLE);
+                    setListViewHeight(lv_breakfast);
 
                     //提示消失
                     tv_breakfast_remind.setVisibility(View.GONE);
@@ -148,6 +151,7 @@ public class FoodConditionActivity extends AppCompatActivity {
                     );
                     lv_lunch.setAdapter(simpleAdapter);
                     lv_lunch.setVisibility(View.VISIBLE);
+                    setListViewHeight(lv_lunch);
 
                     //提示消失
                     tv_lunch_remind.setVisibility(View.GONE);
@@ -166,6 +170,7 @@ public class FoodConditionActivity extends AppCompatActivity {
                     );
                     lv_dinner.setAdapter(simpleAdapter);
                     lv_dinner.setVisibility(View.VISIBLE);
+                    setListViewHeight(lv_dinner);
 
                     //提示消失
                     tv_dinner_remind.setVisibility(View.GONE);
@@ -427,6 +432,29 @@ public class FoodConditionActivity extends AppCompatActivity {
         needCal = userService.getNeedCalByUserId(uid) - cal;
         sportCal = sportService.getTodayExpandCalBy(uid,date);
         leftCal = needCal;
+
+    }
+
+    //动态改变listView的高度
+    public void setListViewHeight(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+//           totalHeight += 80;
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+//          params.height = 80 * (listAdapter.getCount() - 1);
+//          params.height = 80 * (listAdapter.getCount());
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        ((ViewGroup.MarginLayoutParams) params).setMargins(0, 0, 0, 0);
+        listView.setLayoutParams(params);
 
     }
 }
