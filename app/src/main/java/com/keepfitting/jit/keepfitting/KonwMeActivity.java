@@ -86,7 +86,8 @@ public class KonwMeActivity extends AppCompatActivity {
         //设置心率
         BodyData bodyData = new BodyData();
         float heartbeat = bodyData.getMaxHeart();
-        tv_konwme_xinlv.setText(heartbeat+"");
+      //  tv_konwme_xinlv.setText(heartbeat+"");
+        tv_konwme_xinlv.setText(String.format("%s 次/分钟到 %s 次/分钟", heartbeat * 0.6, heartbeat * 0.75));
 
 
 
@@ -94,21 +95,6 @@ public class KonwMeActivity extends AppCompatActivity {
         String BMI ;
         BMI= userinfo.getBMI()+"";
         tv_knowme_bmi.setText(BMI);
-
-
-
-//        Calendar cal = Calendar.getInstance();
-//
-//        cal.setTime(birthDay);
-//        int yearBirth = cal.get(Calendar.YEAR);
-//
-//
-
-
-
-
-
-
 
 
 

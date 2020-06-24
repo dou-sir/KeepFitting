@@ -56,7 +56,7 @@ public class BodyData implements Serializable {
     //        中低强度的运动应该达到人最大心率(最大心率=220-实际年龄)的60%~75%
     public float getMaxHeart() {
         try {
-            maxHeart = 220 - TimeUtil.BirthDayToAge(String.valueOf(getBirthday()));
+            maxHeart = 200 - TimeUtil.BirthDayToAge(String.valueOf(getBirthday()));
         } catch (Exception e) {
             e.printStackTrace();
         }
