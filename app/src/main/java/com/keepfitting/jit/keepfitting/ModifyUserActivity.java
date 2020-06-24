@@ -104,7 +104,7 @@ public class ModifyUserActivity extends AppCompatActivity {
 //                    startActivity(new Intent(ModifyUserActivity.this,MainActivity.class));
 //                    ModifyUserActivity.this.finish();
                 }else{
-                    System.out.println("修改失败!");
+                    System.out.println("修改失败!!");
                 }
 
 
