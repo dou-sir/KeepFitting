@@ -53,23 +53,24 @@ public class FoodConditionActivity extends AppCompatActivity {
 
     private String date;
 
-    //TODO 运动的热量
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_condition);
 
+        foodService = new FoodServiceImpl(FoodConditionActivity.this);
+        sportService = new SportServiceImpl(FoodConditionActivity.this);
+        userService = new UserServiceImpl(FoodConditionActivity.this);
+        goalService = new GoalServiceImpl(FoodConditionActivity.this);
 
         initComponent();
 
 
-        //TODO  获取每日能够摄取的能量 和 运动的能量
         Intent intent=getIntent();
         userId = intent.getIntExtra("userId",0);
-        needCal = intent.getIntExtra("needCal",1500);
-        sportCal = intent.getIntExtra("sportCal",0);
-        leftCal = needCal;
+        getAllData(userId);
         tv_foodCon_needCal.setText(needCal+"");
 
         init();
@@ -99,10 +100,7 @@ public class FoodConditionActivity extends AppCompatActivity {
     }
 
     public void init(){
-        foodService = new FoodServiceImpl(FoodConditionActivity.this);
-        sportService = new SportServiceImpl(FoodConditionActivity.this);
-        userService = new UserServiceImpl(FoodConditionActivity.this);
-        goalService = new GoalServiceImpl(FoodConditionActivity.this);
+
 
         //获取今日日期 修改格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -310,6 +308,8 @@ public class FoodConditionActivity extends AppCompatActivity {
     public void toShowFood(View view){
         Intent intent = new Intent(this,ShowFoodActivity.class);
         intent.putExtra("userId",userId);
+        date = tv_foodCon_date.getText()+"";
+        intent.putExtra("date",date);
         startActivityForResult(intent,2);
     }
 
@@ -328,8 +328,9 @@ public class FoodConditionActivity extends AppCompatActivity {
         if (requestCode ==2){
             if (resultCode == RESULT_OK){
                 //获取今天日期 再次展示
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                date = df.format(new Date());
+//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//                date = df.format(new Date());
+                date = ShowFoodActivity.getDate();
                 tv_foodCon_date.setText(date);
                 clearListView();
                 eatenFoodList = foodService.getEatenFoodByUID(userId,date);
@@ -383,6 +384,9 @@ public class FoodConditionActivity extends AppCompatActivity {
         tv_breakfast_remind.setVisibility(View.VISIBLE);
         tv_lunch_remind.setVisibility(View.VISIBLE);
         tv_dinner_remind.setVisibility(View.VISIBLE);
+        breakfastCal =0;
+        lunchCal = 0;
+        dinnerCal = 0;
 
         refresh(needCal,totalCal,leftCal,sportCal);
     }
@@ -412,6 +416,17 @@ public class FoodConditionActivity extends AppCompatActivity {
             tv_foodCon_expend.setText(expand+"");
 
         }
+
+    }
+
+    //获取所有数据
+    public void getAllData(int uid){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = df.format(new Date());
+        int cal = goalService.getLoseWeightData(uid);
+        needCal = userService.getNeedCalByUserId(uid) - cal;
+        sportCal = sportService.getTodayExpandCalBy(uid,date);
+        leftCal = needCal;
 
     }
 }

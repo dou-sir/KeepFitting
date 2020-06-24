@@ -12,12 +12,30 @@ public class Figure implements Serializable {
     public Figure() {
     }
 
+    public Figure(int userId, String figureType, float figureData, String recordDate) {
+        this.userId = userId;
+        this.figureType = figureType;
+        this.figureData = figureData;
+        this.recordDate = recordDate;
+    }
+
     public Figure(int figureId, int userId, String figureType, float figureData, String recordDate) {
         this.figureId = figureId;
         this.userId = userId;
         this.figureType = figureType;
         this.figureData = figureData;
         this.recordDate = recordDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Figure{" +
+                "figureId=" + figureId +
+                ", userId=" + userId +
+                ", figureType='" + figureType + '\'' +
+                ", figureData=" + figureData +
+                ", recordDate='" + recordDate + '\'' +
+                '}';
     }
 
     public int getFigureId() {

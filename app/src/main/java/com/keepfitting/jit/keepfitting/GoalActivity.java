@@ -18,5 +18,9 @@ public class GoalActivity extends AppCompatActivity {
 
         fragmentTransaction.add(R.id.ll_main,fragmentGoal);
         fragmentTransaction.commit();
+
+
     }
+
+
 }

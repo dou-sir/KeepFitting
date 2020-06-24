@@ -36,7 +36,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private ImageView iv_menu;
     private DrawerLayout dl_menu;
@@ -100,15 +100,6 @@ public class MainActivity extends AppCompatActivity {
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int cal = goalService.getLoseWeightData(userinfo.getUserID());     //获取减肥时每天需要减少摄取的能量数值
-                int needCal = userService.getNeedCalByUserId(userinfo.getUserID());     //每天需要摄入的能量
-                needCal = needCal - cal;
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String date = sdf.format(new Date());
-
-
                 switch (item.getItemId()){
                     case R.id.nav_home:
                         //todo 切换fragment
@@ -124,27 +115,25 @@ public class MainActivity extends AppCompatActivity {
                         fmTransaction(fragmentAddGoal);
                         break;
                     case R.id.nav_newfigure:
-                        ShowFigureFragment showFigureFragment = new ShowFigureFragment();
-                        fmTransaction(showFigureFragment);
+                        ShowFigureFragment newFigureFragment = new ShowFigureFragment();
+                        fmTransaction(newFigureFragment);
                         break;
                     case R.id.nav_showfigure:
-                        Figure01Fragment figure01Fragment = new Figure01Fragment();
-                        fmTransaction(figure01Fragment);
+                        ShowFigureFragment showFigureFragment = new ShowFigureFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("flag","show");
+                        showFigureFragment.setArguments(bundle);
+
+                        fmTransaction(showFigureFragment);
                         break;
                     case R.id.nav_showfoodCC:
-                        int sportCal = sportService.getTodayExpandCalBy(userinfo.getUserID(),date);
                         Intent intent = new Intent(MainActivity.this,FoodConditionActivity.class);
-                        intent.putExtra("needCal",needCal);
-                        intent.putExtra("sportCal",sportCal);
                         intent.putExtra("userId",userinfo.getUserID());
                         startActivity(intent);
                         break;
                     case R.id.nav_showconusumeCC:
-                        int takenCal = foodService.getTodayTakenCalBy(userinfo.getUserID(),date);
                         Intent intent1 = new Intent(MainActivity.this,SportConditionActivity.class);
-                        intent1.putExtra("needCal",needCal);
                         intent1.putExtra("userId",userinfo.getUserID());
-                        intent1.putExtra("takenCal",takenCal);
                         startActivity(intent1);
                         break;
                     case R.id.nav_showself:

@@ -24,6 +24,7 @@ import com.keepfitting.jit.keepfitting.DetailsMarkerView;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +60,8 @@ public class ChartUtils extends CombinedChart{
     public static LineChart initChart(LineChart chart, int size, Context mcontext) {
         /***图表设置***/
         // 没有数据的时候，显示“暂无数据”
-        chart.setNoDataText("暂无数据");
+        chart.setNoDataText("数据不足(至少需要两条数据)");
+        chart.setNoDataTextColor(Color.RED);
         // 不显示表格颜色
         chart.setDrawGridBackground(false);
         //是否展示网格线
@@ -198,13 +200,13 @@ public class ChartUtils extends CombinedChart{
      * @param values  数据
      * @param //valueType 数据类型
      */
-    public static void notifyDataSetChanged(LineChart chart, final List<Entry> values) {//,final int valueType
+    public static void notifyDataSetChanged(LineChart chart, final List<Entry> values,final List<String> dates) {//
         chart.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 int size = values.size();
 
-                return xValuesProcess(size)[(int) value];//todo????
+                return xValuesProcess(size,dates)[(int) value];//todo????
             }
         });
 
@@ -220,18 +222,25 @@ public class ChartUtils extends CombinedChart{
      * @param //valueType 数据类型
      * @return x轴数据
      */
-    private static String[] xValuesProcess(int size) {//, String date
+    private static String[] xValuesProcess(int size,List<String> dates) {//, String date
         // 月
         String[] monthValues = new String[size];
-        long currentTime = System.currentTimeMillis();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
         for (int i = size-1; i >= 0; i--) {
-            monthValues[i] = formatter.format(new Date(currentTime));//TimeUtils.dateToString(currentTime, TimeUtils.dateFormat_month);
-            if(monthValues[i].equals("06-10")){
-                monthValues[i] = "20/06-10";
-            }
-            currentTime -= (24 * 60 * 60 * 1000);
+//            if (dates.get(i).substring(5,10).equals("01-01"))
+                monthValues[i] = dates.get(i).substring(5,10);
+//            else
+//                monthValues[i] = dates.get(i).substring(5,10);
         }
+
+//        long currentTime = System.currentTimeMillis();
+//        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
+//        for (int i = size-1; i >= 0; i--) {
+//            monthValues[i] = formatter.format(new Date(currentTime));//TimeUtils.dateToString(currentTime, TimeUtils.dateFormat_month);
+//            if(monthValues[i].equals("06-10")){
+//                monthValues[i] = "20/06-10";
+//            }
+//            currentTime -= (24 * 60 * 60 * 1000);
+//        }
         return monthValues;
     }
 

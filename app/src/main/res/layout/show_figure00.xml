@@ -22,24 +22,5 @@
             android:id="@+id/lc_chart"
             android:layout_width="match_parent"
             android:layout_height="400dp"  />
-
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/smssdk_black"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="最近一次记录时间为："/>
-    <TextView
-        android:id="@+id/tv_recenttime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:textSize="20dp"
-        android:text="暂无数据" />
-
-
 </LinearLayout>

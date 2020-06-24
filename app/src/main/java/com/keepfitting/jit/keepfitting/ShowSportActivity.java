@@ -41,6 +41,8 @@ public class ShowSportActivity extends AppCompatActivity {
 
 
 
+    private static String date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,9 @@ public class ShowSportActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         userId = intent.getIntExtra("userId",0);
+
+
+        date = intent.getStringExtra("date");
 
         initComponent();
         init();
@@ -81,18 +86,18 @@ public class ShowSportActivity extends AppCompatActivity {
         lv_showSport.setAdapter(sportAdapter);
 
         //获取今日数据
-        //TODO 测试
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String str = df.format(new Date());
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        String str = df.format(new Date());
 
-        List<DoneSport> doneSports = sportService.getDoneSportByUID(userId,str);
-        if (doneSports.size()>0) {
-            for (DoneSport doneSport : doneSports) {
-                System.out.println(doneSport);
-            }
-        }else {
-            System.out.println("没有数据");
-        }
+        //测试
+//        List<DoneSport> doneSports = sportService.getDoneSportByUID(userId,date);
+//        if (doneSports.size()>0) {
+//            for (DoneSport doneSport : doneSports) {
+//                System.out.println(doneSport);
+//            }
+//        }else {
+//            System.out.println("没有数据");
+//        }
     }
 
     //回到上一个Activity
@@ -154,6 +159,10 @@ public class ShowSportActivity extends AppCompatActivity {
 
     public static int getUserId() {
         return userId;
+    }
+
+    public static String getDate(){
+        return date;
     }
 
 }
